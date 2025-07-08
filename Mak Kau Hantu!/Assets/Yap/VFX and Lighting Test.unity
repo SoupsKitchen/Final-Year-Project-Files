@@ -171,8 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings:
-  - {fileID: 151476415}
+  m_Bindings: []
   m_VisualEffect: {fileID: 151476418}
 --- !u!73398921 &151476417
 VFXRenderer:
@@ -239,7 +238,7 @@ VisualEffect:
       - m_Value: {x: 7.024324, y: 175.15657, z: 188.08917}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: 0.9133662, y: 0.90853065, z: -1.5766685}
+      - m_Value: {x: 1.0423661, y: 0.90853065, z: -2.6216686}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 0.99999225, y: 0.9999998, z: 0.99999994}
@@ -639,7 +638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
-  m_Bindings: []
+  m_Bindings:
+  - {fileID: 1224621744}
   m_VisualEffect: {fileID: 1224621747}
 --- !u!73398921 &1224621746
 VFXRenderer:
