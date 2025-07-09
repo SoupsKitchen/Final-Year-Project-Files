@@ -3,6 +3,7 @@ guid: ffc15e7867fd00243ab3ad92417f6f72
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
+<<<<<<< HEAD
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -79,6 +80,9 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: staircase frame
     second: {fileID: 2100000, guid: d97b3f175166dd348a40d910f29e7b82, type: 2}
+=======
+  externalObjects: {}
+>>>>>>> origin/Surau-Branch
   materials:
     materialImportMode: 2
     materialName: 0
