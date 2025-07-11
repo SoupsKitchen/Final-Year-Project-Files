@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f47aee6939b1c44a82de0b74bbfdf42
+guid: aa5807f053f7cec43a270c72d5469435
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,35 +7,25 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.008
-    second: {fileID: 2100000, guid: 1b6d8180f5e8a8a4dad6334405f69299, type: 2}
+      name: wall
+    second: {fileID: 2100000, guid: 268ae647e35b76644b96a4d6e18f89ad, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.009
-    second: {fileID: 2100000, guid: abb723d17479fe44889496ca96a4ce08, type: 2}
+      name: wall door
+    second: {fileID: 2100000, guid: 16fa88e32ae51814c9c687e57061a18e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.010
-    second: {fileID: 2100000, guid: d920d4767e0e8bc4b94c8e31775a82ca, type: 2}
+      name: wall truss
+    second: {fileID: 2100000, guid: 8e35658c22900ba429b40c3c1891e223, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: PBR bark
-    second: {fileID: 2100000, guid: 7429931ad4ef5874f843c9aa6588d451, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tree Bark
-    second: {fileID: 2100000, guid: 1daaa213fac09454298b1ea418a2bfeb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tree Bark.001
-    second: {fileID: 2100000, guid: 93b9c2b125f72f241ba75ed5a39d9004, type: 2}
+      name: wall window
+    second: {fileID: 2100000, guid: f3618e4923ed1a44db4ddc07cc1d3f8d, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

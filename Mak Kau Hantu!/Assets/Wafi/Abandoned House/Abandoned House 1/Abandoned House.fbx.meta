@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f47aee6939b1c44a82de0b74bbfdf42
+guid: be858c212c9ff0940b2b9acf265bfff0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,35 +7,45 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.008
-    second: {fileID: 2100000, guid: 1b6d8180f5e8a8a4dad6334405f69299, type: 2}
+      name: Big Roof
+    second: {fileID: 2100000, guid: fb91cc3980780814ab28e539aa5b5f28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.009
-    second: {fileID: 2100000, guid: abb723d17479fe44889496ca96a4ce08, type: 2}
+      name: Floor
+    second: {fileID: 2100000, guid: e3e6457f024897347a41d4a9c83e8005, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.010
-    second: {fileID: 2100000, guid: d920d4767e0e8bc4b94c8e31775a82ca, type: 2}
+      name: Small Roof
+    second: {fileID: 2100000, guid: aaa6787bfc297204b9204b84fedd01f7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: PBR bark
-    second: {fileID: 2100000, guid: 7429931ad4ef5874f843c9aa6588d451, type: 2}
+      name: Struts
+    second: {fileID: 2100000, guid: 9892ffb01f08e564a867232e3529ec85, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tree Bark
-    second: {fileID: 2100000, guid: 1daaa213fac09454298b1ea418a2bfeb, type: 2}
+      name: Wall
+    second: {fileID: 2100000, guid: 56e4cd6f35a65c4489417c2ed5a9d448, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tree Bark.001
-    second: {fileID: 2100000, guid: 93b9c2b125f72f241ba75ed5a39d9004, type: 2}
+      name: Wall Door
+    second: {fileID: 2100000, guid: ec3acf65acad55f4e8a3fa720d267bbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 3f5ccbd4a4a74974ebf2fccf76a0a835, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window wall
+    second: {fileID: 2100000, guid: 73d38c9db4932fb4ab7971c949749a19, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

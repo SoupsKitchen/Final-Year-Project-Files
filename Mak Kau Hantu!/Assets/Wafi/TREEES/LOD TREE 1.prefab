@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 418.27908, y: 0.000007767265, z: 435.48944}
-  m_LocalScale: {x: 4.62492, y: 4.62492, z: 4.62492}
+  m_LocalScale: {x: 9, y: 9, z: 9}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7495346271003116467}
@@ -72,7 +72,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.4
+  - screenRelativeHeight: 0.7
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 463544939727843791}
