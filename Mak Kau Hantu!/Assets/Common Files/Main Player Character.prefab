@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 20
-  sprintSpeed: 40
+  sprintSpeed: 60
   crouchSpeed: 15
   crouchHeight: 1.25
   mouseSensitivity: 2

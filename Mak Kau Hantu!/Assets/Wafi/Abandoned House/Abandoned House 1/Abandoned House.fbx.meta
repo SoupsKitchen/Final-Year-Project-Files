@@ -43,7 +43,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Window wall
-    second: {fileID: 2100000, guid: 73d38c9db4932fb4ab7971c949749a19, type: 2}
+    second: {fileID: 2100000, guid: 5eb8a0ed7c94b1945abc0bf24ac85f23, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
