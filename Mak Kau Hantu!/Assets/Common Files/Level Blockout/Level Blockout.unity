@@ -966,7 +966,7 @@ Transform:
   m_GameObject: {fileID: 543769602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 505.88, y: -7.6528, z: 499.44}
+  m_LocalPosition: {x: 453.8, y: -17.9, z: 499.44}
   m_LocalScale: {x: 1.1679, y: 1.1679, z: 1.1679}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1082,7 +1082,7 @@ PrefabInstance:
     - target: {fileID: 3676628711560646767, guid: 66e2680663966a9438c258fa63c027c6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.3419857
+      value: 6.9
       objectReference: {fileID: 0}
     - target: {fileID: 3676628711560646767, guid: 66e2680663966a9438c258fa63c027c6,
         type: 3}
@@ -2923,6 +2923,26 @@ PrefabInstance:
       propertyPath: sprintSpeed
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 9119141361916321115, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      propertyPath: boundaryRadius
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119141361916321115, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      propertyPath: boundaryCenter.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119141361916321115, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      propertyPath: boundaryCenter.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119141361916321115, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      propertyPath: boundaryCenter.z
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4301,71 +4321,38 @@ MonoBehaviour:
   visibleTerrainsOnly: 0
   treeTypes:
   - enabled: 1
-    name: LOD TREE 2
-    seed: 96834
+    name: LOD TREE 1
+    seed: 34031
     probability: 100
-    collisionCheck: 1
+    collisionCheck: 0
     rejectUnderwater: 0
-    heightRange: {x: 6.577162, y: 8.922341}
-    slopeRange: {x: 0, y: 60}
+    heightRange: {x: 0, y: 1000}
+    slopeRange: {x: 0, y: 90}
     curvatureRange: {x: 0, y: 1}
     layerMasks:
     - name: Brown Mud
       layerID: 0
       threshold: 0
-    instanceCount: 158
+    - name: NewLayer
+      layerID: 2
+      threshold: 0
+    instanceCount: 1659
     prefabs:
     - index: 0
       probability: 100
+      prefab: {fileID: 1147244313728144190, guid: 589e872dcfa958e4a8a80652f96ceae4,
+        type: 3}
+    - index: 1
+      probability: 100
       prefab: {fileID: 2933922087813212777, guid: 8af0b97e2e2a8ba469187ff2510a5fe2,
         type: 3}
-    distance: 45
-    scaleRange: {x: 0.8, y: 1.2}
-    sinkAmount: 0
-  - enabled: 1
-    name: LOD TREE 3
-    seed: 21287
-    probability: 100
-    collisionCheck: 1
-    rejectUnderwater: 0
-    heightRange: {x: 6, y: 10}
-    slopeRange: {x: 0, y: 60}
-    curvatureRange: {x: 0, y: 1}
-    layerMasks:
-    - name: Brown Mud
-      layerID: 0
-      threshold: 0
-    instanceCount: 263
-    prefabs:
-    - index: 1
+    - index: 2
       probability: 100
       prefab: {fileID: 4300399958504680080, guid: 45b682e36d209bb4fabe414eea62d3bf,
         type: 3}
-    distance: 45
-    scaleRange: {x: 0.8, y: 1.2}
-    sinkAmount: 0.1
-  - enabled: 1
-    name: LOD TREE 1
-    seed: 22808
-    probability: 100
-    collisionCheck: 1
-    rejectUnderwater: 0
-    heightRange: {x: 5, y: 8}
-    slopeRange: {x: 0, y: 60}
-    curvatureRange: {x: 0, y: 1}
-    layerMasks:
-    - name: Brown Mud
-      layerID: 0
-      threshold: 0
-    instanceCount: 296
-    prefabs:
-    - index: 2
-      probability: 100
-      prefab: {fileID: 1147244313728144190, guid: 589e872dcfa958e4a8a80652f96ceae4,
-        type: 3}
     distance: 40
     scaleRange: {x: 0.8, y: 1.2}
-    sinkAmount: 0.1
+    sinkAmount: 0
   grassPrefabs: []
   terrainSettings:
     drawTreesAndFoliage: 1

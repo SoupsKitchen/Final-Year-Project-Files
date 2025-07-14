@@ -24,6 +24,10 @@ public class FPSControllerCharacter : MonoBehaviour
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
 
+    [Header("Circular Boundary")]
+    public Vector3 boundaryCenter = Vector3.zero;
+    public float boundaryRadius = 20f;
+
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -45,6 +49,7 @@ public class FPSControllerCharacter : MonoBehaviour
         HandleCrouchToggle();
         HandleMovement();
         ApplyGravity();
+        ClampToBoundary();
     }
 
     void HandleLook()
@@ -109,6 +114,22 @@ public class FPSControllerCharacter : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
+    void ClampToBoundary()
+    {
+        Vector3 flatPosition = new Vector3(transform.position.x, 0f, transform.position.z);
+        Vector3 flatCenter = new Vector3(boundaryCenter.x, 0f, boundaryCenter.z);
+        Vector3 directionFromCenter = flatPosition - flatCenter;
+
+        if (directionFromCenter.magnitude > boundaryRadius)
+        {
+            directionFromCenter = directionFromCenter.normalized * boundaryRadius;
+            Vector3 clampedPosition = flatCenter + directionFromCenter;
+
+            // Apply clamped position while preserving Y position
+            transform.position = new Vector3(clampedPosition.x, transform.position.y, clampedPosition.z);
+        }
+    }
+
     void HandleCrouchToggle()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -132,6 +153,9 @@ public class FPSControllerCharacter : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(new Vector3(boundaryCenter.x, transform.position.y, boundaryCenter.z), boundaryRadius);
+
         if (controller == null) return;
 
         Vector3 groundCheckPos = transform.position + Vector3.down * (controller.height / 2 - controller.skinWidth);
