@@ -1,12 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.IO;
-using SimpleJSON;
-
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Networking;
 using SimpleJSON;
 
 public class MalayVoiceRecognizer : MonoBehaviour
@@ -16,7 +10,22 @@ public class MalayVoiceRecognizer : MonoBehaviour
     private const int sampleRate = 16000;
     private bool isRecording = false;
 
-    public PlayerRunner playerRunner; // Drag Player GameObject with PlayerRunner script here
+    public PlayerRunner playerRunner;
+    public GhostController ghostController;
+
+    public float commandCooldown = 2f;
+    private float lastCommandTime = -10f;
+    private string lastRecognizedCommand = "";
+
+    public string[] ghostRepelWords = {
+        "pergi", "undur", "keluar", "lari", "jangan dekat",
+        "aku tak takut", "berambus", "halau", "aku halau kau", "kau takut"
+    };
+
+    public string[] ghostAngerWords = {
+        "mari sini", "bodoh", "lemah", "tunjuk diri", "pengecut",
+        "aku cabar kau", "kau tak berani", "hantu pengecut", "muncul", "serang aku"
+    };
 
     void Start()
     {
@@ -74,47 +83,43 @@ public class MalayVoiceRecognizer : MonoBehaviour
         string spokenText = response["text"];
         Debug.Log("Recognized Text: " + spokenText);
 
-        if (spokenText.Contains("mula permainan"))
+        // === Cooldown + duplicate check ===
+        if (spokenText == lastRecognizedCommand && Time.time - lastCommandTime < commandCooldown)
         {
-            Debug.Log("Voice Command Detected: Start Game");
-            StartGame();
+            Debug.Log("Ignored: Same command repeated too soon.");
+            return;
         }
-        else if (spokenText.Contains("buka pintu"))
+
+        lastRecognizedCommand = spokenText;
+        lastCommandTime = Time.time;
+
+        // === Ghost repel commands ===
+        foreach (string word in ghostRepelWords)
         {
-            Debug.Log("Voice Command Detected: Open Door");
-            OpenDoor();
+            if (spokenText.Contains(word))
+            {
+                Debug.Log("Voice Command Detected: Repel Ghost");
+                ghostController?.RunAwayFromPlayer();
+                return;
+            }
         }
-        else if (spokenText.Contains("ambil kunci"))
+
+        // === Ghost anger commands ===
+        foreach (string word in ghostAngerWords)
         {
-            Debug.Log("Voice Command Detected: Pick Up Key");
-            PickUpKey();
+            if (spokenText.Contains(word))
+            {
+                Debug.Log("Voice Command Detected: Anger Ghost");
+                ghostController?.ChasePlayerFaster();
+                return;
+            }
         }
-        else if (spokenText.Contains("lari"))
+
+        // === Player commands ===
+        if (spokenText.Contains("lari"))
         {
             Debug.Log("Voice Command Detected: Run");
-            if (playerRunner != null)
-            {
-                playerRunner.RunForward();
-            }
-            else
-            {
-                Debug.LogWarning("PlayerRunner not assigned in Inspector.");
-            }
-        }
-        else if (spokenText.Contains("letupkan dinding"))
-        {
-            Debug.Log("Voice Command Detected: Trigger Explosion");
-            TriggerExplosion();
-        }
-        else
-        {
-            Debug.Log("Voice Command Detected: No known match found.");
+            playerRunner?.RunForward();
         }
     }
-
-    // Dummy gameplay methods for testing
-    void StartGame() => Debug.Log("Game Started!");
-    void OpenDoor() => Debug.Log("Door Opened!");
-    void PickUpKey() => Debug.Log("Key Picked Up!");
-    void TriggerExplosion() => Debug.Log("Explosion Triggered!");
 }

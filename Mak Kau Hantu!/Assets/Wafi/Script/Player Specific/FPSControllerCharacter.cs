@@ -36,6 +36,9 @@ public class FPSControllerCharacter : MonoBehaviour
     private MovementState currentState = MovementState.Walking;
     private MovementState previousState = MovementState.Walking;
 
+    [Header("Pause")]
+    public bool isPaused = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -45,6 +48,9 @@ public class FPSControllerCharacter : MonoBehaviour
 
     void Update()
     {
+        if (isPaused)
+            return;
+
         HandleLook();
         HandleCrouchToggle();
         HandleMovement();
@@ -97,20 +103,15 @@ public class FPSControllerCharacter : MonoBehaviour
 
     void ApplyGravity()
     {
-        // Ground check
         Vector3 groundCheckPos = transform.position + Vector3.down * (controller.height / 2 - controller.skinWidth);
         isGrounded = Physics.CheckSphere(groundCheckPos, groundCheckDistance, groundMask);
 
-        // Reset falling velocity when grounded
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Small downward force to keep grounded
+            velocity.y = -2f;
         }
 
-        // Apply gravity
         velocity.y += gravity * Time.deltaTime;
-
-        // Apply vertical movement
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -125,7 +126,6 @@ public class FPSControllerCharacter : MonoBehaviour
             directionFromCenter = directionFromCenter.normalized * boundaryRadius;
             Vector3 clampedPosition = flatCenter + directionFromCenter;
 
-            // Apply clamped position while preserving Y position
             transform.position = new Vector3(clampedPosition.x, transform.position.y, clampedPosition.z);
         }
     }
