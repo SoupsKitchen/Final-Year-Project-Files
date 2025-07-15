@@ -3191,6 +3191,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2772293481564882352, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9119141361916321115, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
       propertyPath: sprintSpeed
@@ -6131,6 +6136,11 @@ PrefabInstance:
       objectReference: {fileID: 524930976}
     - target: {fileID: 5185136263292351621, guid: b5d4e7d98fc768d45bbc3405f6751b35,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185136263292351621, guid: b5d4e7d98fc768d45bbc3405f6751b35,
+        type: 3}
       propertyPath: mainMenuUI
       value: 
       objectReference: {fileID: 1721663647}
@@ -6336,6 +6346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Game UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891697699920638313, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5734799328859937506, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
         type: 3}

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2552796630151919196}
-  - component: {fileID: 1845134718844095079}
   - component: {fileID: 9119141361916321115}
   - component: {fileID: 2099033206962393125}
   m_Layer: 0
@@ -36,21 +35,6 @@ Transform:
   - {fileID: 2827685289058349191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1845134718844095079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927813613100833189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e40e4b49685c7341baacfbde8c1e53d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holdPoint: {fileID: 8660059524376082286}
-  grabDistance: 3
-  moveSpeed: 10
 --- !u!114 &9119141361916321115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +59,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
+  boundaryCenter: {x: 0, y: 0, z: 0}
+  boundaryRadius: 20
+  isPaused: 0
 --- !u!143 &2099033206962393125
 CharacterController:
   m_ObjectHideFlags: 0
@@ -113,6 +100,7 @@ GameObject:
   - component: {fileID: 8018302867009722101}
   - component: {fileID: 3346292332501316643}
   - component: {fileID: 8870202863563411690}
+  - component: {fileID: 2772293481564882352}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -239,6 +227,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &2772293481564882352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726356235018636456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e40e4b49685c7341baacfbde8c1e53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdPoint: {fileID: 8660059524376082286}
+  grabDistance: 3
+  moveSpeed: 10
 --- !u!1 &4421963669090511011
 GameObject:
   m_ObjectHideFlags: 0
