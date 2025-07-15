@@ -1,64 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Pontianak_Behaviour : MonoBehaviour
 {
-    //Stat Params
-    public float moveSpeed;
-    public float turnSpeed;
-    public float accelSpeed;
-    
-    //Stalking Params
-    private float minDistance, maxDistance;
-    private float _interest;
-
     //Detection Params
     public float visionAngle;
     private float _halfCone;
-    private float _cosFOV;
+    private bool _seesPlayer = false;
     
-    private Transform _lastSeen;
-    private NavMeshAgent _agent;
+    private Transform _lastSeenLocation;
     private Transform _player;
+    private NavMeshAgent _agent;
+    public List<Transform> importantLocations;
 
-
-
-
-
+    private StateMachine _stateMachine;
+    private IState patrolState, idleState, stalkState, chaseState;
 
     // Start is called before the first frame update
     void Start()
     {
+        _stateMachine = new StateMachine();
+        patrolState = new State_Patrol();
+        idleState = new State_Idle();
+        stalkState = new State_Stalk();
+        chaseState = new State_Chase();
+        
         _agent = GetComponent<NavMeshAgent>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
         _halfCone = visionAngle / 2 * Mathf.Deg2Rad;
+        StartCoroutine(Look());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_seesPlayer)
+        {
+            _agent.SetDestination(_lastSeenLocation.position);
+        }
 
+        
+        
     }
 
-    public void Look()
+    public IEnumerator Look()
     {
-        _cosFOV = Mathf.Cos(_halfCone);
-        Vector3 toPlayer = (_player.position - transform.position).normalized;
-        float dp = Vector3.Dot(transform.forward, toPlayer);
-
-        if (dp > _cosFOV)
+        while (true)
         {
-            _lastSeen = _player;
-            BeginChase();
-            //Player is in the cone of vision
+            float _cosFOV = Mathf.Cos(_halfCone);
+            Vector3 toPlayer = (_player.position - transform.position).normalized;
+            float dp = Vector3.Dot(transform.forward, toPlayer);
+
+            if (dp > _cosFOV)
+            {
+                _seesPlayer = true;
+                _lastSeenLocation = _player;
+                Debug.Log("Player Detected!");
+                //Player is in the cone of vision
+            }
+            else
+            {
+                _seesPlayer = false;
+                Debug.Log("Player Not Found!");
+            }
+            yield return new WaitForSeconds(0.1f);
         }
+        
 
     }
 
     public void BeginChase()
     {
-        if (_lastSeen != null)
+        if (_lastSeenLocation != null)
         {
             //Chase Player;
         }
