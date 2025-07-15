@@ -1287,7 +1287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!73398921 &1903550844
 VFXRenderer:
   serializedVersion: 1
@@ -1296,7 +1296,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903550843}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1446,7 +1446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -1467,16 +1467,16 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.5091263, b: 0, a: 1}
-  m_Intensity: 5
+  m_Intensity: 20
   m_Range: 14.95
   m_SpotAngle: 108.77845
   m_InnerSpotAngle: 46.88053
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.303
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -1525,13 +1525,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061127515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.036, y: 4.2, z: -2.7}
+  m_LocalRotation: {x: 0.5123965, y: -0.4872882, z: -0.4872884, w: 0.51239645}
+  m_LocalPosition: {x: 5.87, y: 1.17, z: -2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.877, y: -90, z: -90}
 --- !u!114 &2061127520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,8 +1549,8 @@ MonoBehaviour:
   maxTimeBetweenFlickers: 8
   flickerDuration: 1
   minFlickerIntensity: 0
-  maxFlickerIntensity: 5
-  stableIntensity: 5
+  maxFlickerIntensity: 20
+  stableIntensity: 20
   flickerSpeed: 0.05
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
