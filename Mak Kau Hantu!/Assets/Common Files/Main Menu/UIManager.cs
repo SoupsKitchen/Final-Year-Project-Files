@@ -8,18 +8,21 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenuUI;
     public GameObject pauseMenuUI;
     public GameObject finalScreenUI;
+    public GameObject instructionMenuUI; // New Instruction Panel
 
     [Header("Buttons")]
     public Button startButton;
-    public Button mainMenuQuitButton; // From main menu
+    public Button mainMenuQuitButton;
     public Button resumeButton;
-    public Button pauseQuitButton;    // From pause menu
-    public Button finalQuitButton;    // From final screen
+    public Button pauseQuitButton;
+    public Button finalQuitButton;
+    public Button instructionOpenButton; // New button to open instruction
+    public Button instructionBackButton; // New button to return to main menu
 
     [Header("Game Objects")]
     public GameObject player;
     public GameObject ghost;
-    public FPSControllerCharacter fpsController; // Drag Player here
+    public FPSControllerCharacter fpsController;
 
     private bool isGamePaused = false;
     private bool gameStarted = false;
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
+        instructionMenuUI.SetActive(false); // Hide instruction panel initially
 
         // Disable gameplay objects
         if (player != null) player.SetActive(false);
@@ -40,8 +44,11 @@ public class UIManager : MonoBehaviour
         mainMenuQuitButton.onClick.AddListener(QuitGame);
         resumeButton.onClick.AddListener(ResumeGame);
         pauseQuitButton.onClick.AddListener(QuitToMainMenu);
-
         finalQuitButton.onClick.AddListener(QuitGame);
+
+        // New buttons for instruction panel
+        instructionOpenButton.onClick.AddListener(OpenInstructionMenu);
+        instructionBackButton.onClick.AddListener(BackToMainMenu);
     }
 
     void Update()
@@ -61,6 +68,7 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
+        instructionMenuUI.SetActive(false);
 
         if (player != null) player.SetActive(true);
         if (ghost != null) ghost.SetActive(true);
@@ -101,6 +109,7 @@ public class UIManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
+        instructionMenuUI.SetActive(false);
         mainMenuUI.SetActive(true);
 
         if (player) player.SetActive(false);
@@ -130,8 +139,29 @@ public class UIManager : MonoBehaviour
         finalScreenUI.SetActive(true);
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+        instructionMenuUI.SetActive(false);
 
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void OpenInstructionMenu()
+    {
+        instructionMenuUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
+        finalScreenUI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void BackToMainMenu()
+    {
+        instructionMenuUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
