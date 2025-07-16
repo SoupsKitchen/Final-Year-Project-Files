@@ -64,7 +64,7 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DissolveScale: 40
-    - _Dissolve_Amount: 0.508
+    - _Dissolve_Amount: 1
     - _Dissolve_Width: 0.02
     - _DstBlend: 0
     - _QueueControl: 0
