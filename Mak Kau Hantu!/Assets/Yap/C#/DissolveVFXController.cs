@@ -1,29 +1,34 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class DissolveController : MonoBehaviour
+public class DissolveVFXController : MonoBehaviour
 {
-    public SkinnedMeshRenderer skinnedMesh;
+    public SkinnedMeshRenderer[] skinnedMeshes;     // Support multiple skinned meshes
     public VisualEffect DissolveParticles;
     public float dissolveRate = 0.025f;
     public float refreshRate = 0.05f;
-    private Material[] meshMaterials;
 
-    // Start is called before the first frame update
+    private List<Material> meshMaterials = new List<Material>();
+
     void Start()
     {
-        if (skinnedMesh != null)
+        // Collect all materials from all skinned meshes
+        foreach (var mesh in skinnedMeshes)
         {
-            meshMaterials = skinnedMesh.materials;
+            if (mesh != null)
+            {
+                meshMaterials.AddRange(mesh.materials); // material instances
+            }
         }
+
         if (DissolveParticles != null)
         {
             DissolveParticles.Stop();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -39,17 +44,16 @@ public class DissolveController : MonoBehaviour
             DissolveParticles.Play();
         }
 
-        if (meshMaterials.Length > 0)
+        float counter = 0;
+
+        if (meshMaterials.Count > 0)
         {
-
-            float counter = 0;
-
             while (meshMaterials[0].GetFloat("_DissolveAmount") < 1)
             {
                 counter += dissolveRate;
-                for (int i = 0; i < meshMaterials.Length; i++)
+                foreach (var mat in meshMaterials)
                 {
-                    meshMaterials[i].SetFloat("_DissolveAmount", counter);
+                    mat.SetFloat("_DissolveAmount", counter);
                 }
                 yield return new WaitForSeconds(refreshRate);
             }
