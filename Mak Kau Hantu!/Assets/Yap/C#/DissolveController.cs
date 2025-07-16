@@ -4,29 +4,32 @@ using UnityEngine.VFX;
 
 public class DissolveController : MonoBehaviour
 {
-    public SkinnedMeshRenderer skinnedMesh;
+    public MeshRenderer[] Meshes;                    // All mesh renderers
     public VisualEffect DissolveParticles;
     public float dissolveRate = 0.025f;
     public float refreshRate = 0.05f;
-    private Material[] skinnedMaterials;
 
-    // Start is called before the first frame update
+    private Material[][] allMaterials;               // Store material instances per mesh renderer
+
     void Start()
     {
-        if (skinnedMesh != null)
+        if (Meshes != null && Meshes.Length > 0)
         {
-            skinnedMaterials = skinnedMesh.materials;
+            allMaterials = new Material[Meshes.Length][];
+
+            for (int i = 0; i < Meshes.Length; i++)
+            {
+                // Make sure we use unique instances of materials
+                allMaterials[i] = Meshes[i].materials;
+            }
         }
+
         if (DissolveParticles != null)
         {
-            DissolveParticles.Stop();   
+            DissolveParticles.Stop();
         }
-     
-
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -42,20 +45,29 @@ public class DissolveController : MonoBehaviour
             DissolveParticles.Play();
         }
 
-        if (skinnedMaterials.Length > 0)
+        float counter = 0;
+
+        bool dissolving = true;
+        while (dissolving)
         {
+            counter += dissolveRate;
 
-            float counter = 0;
+            dissolving = false;
 
-            while (skinnedMaterials[0].GetFloat("_Dissolve_Amount") < 1)
+            for (int i = 0; i < allMaterials.Length; i++)
             {
-                counter += dissolveRate;
-                for (int i = 0; i < skinnedMaterials.Length; i++)
+                for (int j = 0; j < allMaterials[i].Length; j++)
                 {
-                    skinnedMaterials[i].SetFloat("_Dissolve_Amount", counter);
+                    float current = allMaterials[i][j].GetFloat("_Dissolve_Amount");
+                    if (current < 1f)
+                    {
+                        allMaterials[i][j].SetFloat("_Dissolve_Amount", counter);
+                        dissolving = true;
+                    }
                 }
-                yield return new WaitForSeconds(refreshRate);
             }
+
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 }
