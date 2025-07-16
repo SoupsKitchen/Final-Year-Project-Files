@@ -17,14 +17,14 @@ public class GraveTrigger : MonoBehaviour
             // Optionally destroy or disable the object
             Destroy(other.gameObject);
 
-            /*if (currentItems >= requiredItems)
+            if (currentItems >= requiredItems)
             {
                 EndGame();
-            }*/
+            }
         }
     }
 
-    /*void EndGame()
+    void EndGame()
     {
         Debug.Log("All items deposited. Game over.");
         if (endScreenUI != null)
@@ -34,5 +34,5 @@ public class GraveTrigger : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    } */
-        }
+    } 
+ }

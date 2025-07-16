@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &258343580611796761
+--- !u!1 &3000360256071403672
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7693735716242421634}
-  - component: {fileID: 5185136263292351621}
+  - component: {fileID: 5793721628835328046}
+  - component: {fileID: 5509504656470598293}
   m_Layer: 0
   m_Name: UI MANAGER
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7693735716242421634
+--- !u!4 &5793721628835328046
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258343580611796761}
+  m_GameObject: {fileID: 3000360256071403672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 524.9228, y: 275.72827, z: -36.077854}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5185136263292351621
+--- !u!114 &5509504656470598293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258343580611796761}
+  m_GameObject: {fileID: 3000360256071403672}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15b77acdf16f5554b993b7db8748d79a, type: 3}
@@ -46,10 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuUI: {fileID: 0}
   pauseMenuUI: {fileID: 0}
+  finalScreenUI: {fileID: 0}
   startButton: {fileID: 0}
   mainMenuQuitButton: {fileID: 0}
   resumeButton: {fileID: 0}
   pauseQuitButton: {fileID: 0}
+  replayButton: {fileID: 0}
+  finalQuitButton: {fileID: 0}
   player: {fileID: 0}
   ghost: {fileID: 0}
   fpsController: {fileID: 0}

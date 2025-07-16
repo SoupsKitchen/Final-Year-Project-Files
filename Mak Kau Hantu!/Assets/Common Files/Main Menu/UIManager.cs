@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     [Header("UI Panels")]
     public GameObject mainMenuUI;
     public GameObject pauseMenuUI;
+    public GameObject finalScreenUI;
 
     [Header("Buttons")]
     public Button startButton;
     public Button mainMenuQuitButton; // From main menu
     public Button resumeButton;
-    public Button pauseQuitButton; // From pause menu
+    public Button pauseQuitButton;    // From pause menu
+    public Button finalQuitButton;    // From final screen
 
     [Header("Game Objects")]
     public GameObject player;
@@ -26,6 +29,7 @@ public class UIManager : MonoBehaviour
         // Initial UI state
         mainMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
+        finalScreenUI.SetActive(false);
 
         // Disable gameplay objects
         if (player != null) player.SetActive(false);
@@ -36,6 +40,8 @@ public class UIManager : MonoBehaviour
         mainMenuQuitButton.onClick.AddListener(QuitGame);
         resumeButton.onClick.AddListener(ResumeGame);
         pauseQuitButton.onClick.AddListener(QuitToMainMenu);
+
+        finalQuitButton.onClick.AddListener(QuitGame);
     }
 
     void Update()
@@ -54,16 +60,17 @@ public class UIManager : MonoBehaviour
         Debug.Log("Starting Game...");
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+        finalScreenUI.SetActive(false);
 
         if (player != null) player.SetActive(true);
         if (ghost != null) ghost.SetActive(true);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         gameStarted = true;
         isGamePaused = false;
         Time.timeScale = 1f;
-
     }
 
     public void PauseGame()
@@ -93,7 +100,9 @@ public class UIManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         pauseMenuUI.SetActive(false);
+        finalScreenUI.SetActive(false);
         mainMenuUI.SetActive(true);
+
         if (player) player.SetActive(false);
         if (ghost) ghost.SetActive(false);
 
@@ -113,5 +122,17 @@ public class UIManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void ShowFinalScreen()
+    {
+        Debug.Log("Game Completed! Showing final screen...");
+        finalScreenUI.SetActive(true);
+        mainMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

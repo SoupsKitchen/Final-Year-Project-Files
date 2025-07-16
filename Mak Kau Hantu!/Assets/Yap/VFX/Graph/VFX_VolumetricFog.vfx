@@ -169,7 +169,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15000
+      m_SerializableObject: 1000
     m_Space: 2147483647
   m_Property:
     name: Rate
@@ -1786,7 +1786,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":-128.86061096191407,"y":0.0,"z":-242.7218017578125},"size":{"x":2995.18310546875,"y":10.0,"z":2985.443603515625}}'
+      m_SerializableObject: '{"center":{"x":-128.86061096191407,"y":0.0,"z":-242.7218017578125},"size":{"x":100.0,"y":10.0,"z":100.0}}'
     m_Space: 0
   m_Property:
     name: Box

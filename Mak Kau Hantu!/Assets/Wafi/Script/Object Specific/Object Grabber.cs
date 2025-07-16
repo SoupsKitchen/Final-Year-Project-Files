@@ -4,25 +4,47 @@ using UnityEngine;
 
 public class ObjectGrabber : MonoBehaviour
 {
-    public Transform holdPoint;
-    public float grabDistance = 3f;
+    public float minGrabDistance = 1f;
+    public float maxGrabDistance = 10f;
     public float moveSpeed = 10f;
+    public float scrollSpeed = 2f;
 
     private Rigidbody heldObject;
-    private GrabbableObject heldGrabbable;
+    private float currentGrabDistance = 3f;
 
     void Update()
+    {
+        HandleGrabInput();
+        HandleHeldObjectMovement();
+        HandleDistanceAdjustment();
+    }
+
+    void HandleGrabInput()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldObject == null)
             {
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                if (Physics.Raycast(ray, out RaycastHit hit, grabDistance))
+                if (Physics.Raycast(ray, out RaycastHit hit, maxGrabDistance))
                 {
                     if (hit.collider.CompareTag("Grabbable"))
                     {
-                        GrabObject(hit.rigidbody);
+                        Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            heldObject = rb;
+                            heldObject.useGravity = false;
+                            heldObject.drag = 10f;
+
+                            // Stop spinning
+                            heldObject.angularVelocity = Vector3.zero;
+
+                            // Prevent further spinning while held
+                            heldObject.freezeRotation = true;
+
+                            currentGrabDistance = Mathf.Clamp(hit.distance, minGrabDistance, maxGrabDistance);
+                        }
                     }
                 }
             }
@@ -31,54 +53,38 @@ public class ObjectGrabber : MonoBehaviour
                 DropObject();
             }
         }
+    }
 
+    void HandleHeldObjectMovement()
+    {
         if (heldObject != null)
         {
-            Vector3 targetPos = holdPoint.position;
+            Vector3 targetPos = Camera.main.transform.position + Camera.main.transform.forward * currentGrabDistance;
             Vector3 direction = targetPos - heldObject.position;
             heldObject.velocity = direction * moveSpeed;
         }
+    }
 
-        // Raycast every frame for highlight (only when not holding anything)
-        if (heldObject == null)
+    void HandleDistanceAdjustment()
+    {
+        if (heldObject != null)
         {
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            if (Physics.Raycast(ray, out RaycastHit hit, grabDistance))
-            {
-                if (hit.collider.CompareTag("Grabbable"))
-                {
-                    GrabbableObject grabbable = hit.collider.GetComponent<GrabbableObject>();
-                    if (grabbable != null)
-                        grabbable.SetHighlight(true);
-                }
-            }
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            currentGrabDistance = Mathf.Clamp(currentGrabDistance + scroll * scrollSpeed, minGrabDistance, maxGrabDistance);
         }
+    }
 
-        void GrabObject(Rigidbody obj)
-        {
-            heldObject = obj;
-            heldObject.useGravity = false;
-            heldObject.drag = 10;
-
-            heldGrabbable = obj.GetComponent<GrabbableObject>();
-            if (heldGrabbable != null)
-                heldGrabbable.SetHeld(true);
-        }
-
-        void DropObject()
+    void DropObject()
+    {
+        if (heldObject != null)
         {
             heldObject.useGravity = true;
-            heldObject.drag = 1;
+            heldObject.drag = 0f;
 
-            if (heldGrabbable != null)
-            {
-                heldGrabbable.SetHeld(false);
-                heldGrabbable = null;
-            }
+            // Allow rotation again
+            heldObject.freezeRotation = false;
 
             heldObject = null;
         }
     }
 }
-
-
