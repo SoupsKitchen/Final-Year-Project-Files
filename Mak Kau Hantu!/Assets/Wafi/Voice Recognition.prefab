@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1639863438919688925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5815920386101633012}
+  - component: {fileID: 8568683444419060667}
+  m_Layer: 0
+  m_Name: Voice Recognition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5815920386101633012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639863438919688925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 514.50775, y: 166.80417, z: 648.7187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8568683444419060667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639863438919688925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b269fd3951fa134da73c593f4a98f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  witApiToken: YZWBZXKB43VPNBPIFZZMFKWY27SSHE3O
+  playerRunner: {fileID: 0}
+  ghostController: {fileID: 0}
+  commandCooldown: 2
+  ghostRepelWords:
+  - pergi
+  - undur
+  - keluar
+  - lari
+  - jangan dekat
+  - aku tak takut
+  - berambus
+  - halau
+  - halau
+  - kau takut
+  ghostAngerWords:
+  - mari sini
+  - bodoh
+  - lemah
+  - tunjuk diri
+  - pengecut
+  - 'meh '
+  - kau tak berani
+  - anjing
+  - muncul
+  - datang
+  - datanglah

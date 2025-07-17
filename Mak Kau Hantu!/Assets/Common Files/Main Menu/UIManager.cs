@@ -8,7 +8,8 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenuUI;
     public GameObject pauseMenuUI;
     public GameObject finalScreenUI;
-    public GameObject instructionMenuUI; // New Instruction Panel
+    public GameObject instructionMenuUI;
+    public GameObject voiceTesterPanel;
 
     [Header("Buttons")]
     public Button startButton;
@@ -16,8 +17,10 @@ public class UIManager : MonoBehaviour
     public Button resumeButton;
     public Button pauseQuitButton;
     public Button finalQuitButton;
-    public Button instructionOpenButton; // New button to open instruction
-    public Button instructionBackButton; // New button to return to main menu
+    public Button instructionOpenButton;
+    public Button instructionBackButton;
+    public Button voiceTesterOpenButton;
+    public Button voiceTesterCloseButton;
 
     [Header("Game Objects")]
     public GameObject player;
@@ -27,28 +30,30 @@ public class UIManager : MonoBehaviour
     private bool isGamePaused = false;
     private bool gameStarted = false;
 
+    private MalayVoiceRecognizer voiceRecognizer;
+
     void Start()
     {
-        // Initial UI state
         mainMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
-        instructionMenuUI.SetActive(false); // Hide instruction panel initially
+        instructionMenuUI.SetActive(false);
+        voiceTesterPanel.SetActive(false);
 
-        // Disable gameplay objects
         if (player != null) player.SetActive(false);
         if (ghost != null) ghost.SetActive(false);
 
-        // Button hooks
+        voiceRecognizer = FindObjectOfType<MalayVoiceRecognizer>();
+
         startButton.onClick.AddListener(StartGame);
         mainMenuQuitButton.onClick.AddListener(QuitGame);
         resumeButton.onClick.AddListener(ResumeGame);
         pauseQuitButton.onClick.AddListener(QuitToMainMenu);
         finalQuitButton.onClick.AddListener(QuitGame);
-
-        // New buttons for instruction panel
         instructionOpenButton.onClick.AddListener(OpenInstructionMenu);
         instructionBackButton.onClick.AddListener(BackToMainMenu);
+        voiceTesterOpenButton.onClick.AddListener(OpenVoiceTesterPanel);
+        voiceTesterCloseButton.onClick.AddListener(CloseVoiceTesterPanel);
     }
 
     void Update()
@@ -64,11 +69,11 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Starting Game...");
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
+        voiceTesterPanel.SetActive(false);
 
         if (player != null) player.SetActive(true);
         if (ghost != null) ghost.SetActive(true);
@@ -79,6 +84,10 @@ public class UIManager : MonoBehaviour
         gameStarted = true;
         isGamePaused = false;
         Time.timeScale = 1f;
+
+        // Start voice recognition on game start
+        if (voiceRecognizer != null)
+            voiceRecognizer.StartVoiceRecognition();
     }
 
     public void PauseGame()
@@ -91,6 +100,10 @@ public class UIManager : MonoBehaviour
         Cursor.visible = true;
 
         if (fpsController != null) fpsController.isPaused = true;
+
+        // Stop voice recognition on pause
+        if (voiceRecognizer != null)
+            voiceRecognizer.StopVoiceRecognition();
     }
 
     public void ResumeGame()
@@ -103,6 +116,12 @@ public class UIManager : MonoBehaviour
         Cursor.visible = false;
 
         if (fpsController != null) fpsController.isPaused = false;
+
+        if (voiceRecognizer != null)
+        {
+            voiceRecognizer.ResetRecordingTimer();  // Reset the recording timer
+            voiceRecognizer.StartVoiceRecognition(); // Resume recognition
+        }
     }
 
     public void QuitToMainMenu()
@@ -110,6 +129,7 @@ public class UIManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
+        voiceTesterPanel.SetActive(false);
         mainMenuUI.SetActive(true);
 
         if (player) player.SetActive(false);
@@ -121,6 +141,9 @@ public class UIManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        if (voiceRecognizer != null)
+            voiceRecognizer.StopVoiceRecognition();
     }
 
     public void QuitGame()
@@ -135,15 +158,18 @@ public class UIManager : MonoBehaviour
 
     public void ShowFinalScreen()
     {
-        Debug.Log("Game Completed! Showing final screen...");
         finalScreenUI.SetActive(true);
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         instructionMenuUI.SetActive(false);
+        voiceTesterPanel.SetActive(false);
 
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        if (voiceRecognizer != null)
+            voiceRecognizer.StopVoiceRecognition();
     }
 
     public void OpenInstructionMenu()
@@ -152,6 +178,7 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
+        voiceTesterPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -160,6 +187,26 @@ public class UIManager : MonoBehaviour
     public void BackToMainMenu()
     {
         instructionMenuUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+        voiceTesterPanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void OpenVoiceTesterPanel()
+    {
+        voiceTesterPanel.SetActive(true);
+        instructionMenuUI.SetActive(false);
+        mainMenuUI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void CloseVoiceTesterPanel()
+    {
+        voiceTesterPanel.SetActive(false);
         mainMenuUI.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
