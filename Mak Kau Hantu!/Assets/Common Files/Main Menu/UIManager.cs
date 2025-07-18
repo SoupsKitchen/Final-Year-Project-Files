@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -29,8 +29,14 @@ public class UIManager : MonoBehaviour
 
     private bool isGamePaused = false;
     private bool gameStarted = false;
+    public bool isReadingNote = false;
 
     private MalayVoiceRecognizer voiceRecognizer;
+
+    public bool IsGamePaused()
+    {
+        return isGamePaused;
+    }
 
     void Start()
     {
@@ -60,6 +66,8 @@ public class UIManager : MonoBehaviour
     {
         if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
         {
+            if (isReadingNote) return;
+
             if (!isGamePaused)
                 PauseGame();
             else
@@ -85,13 +93,14 @@ public class UIManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1f;
 
-        // Start voice recognition on game start
         if (voiceRecognizer != null)
             voiceRecognizer.StartVoiceRecognition();
     }
 
     public void PauseGame()
     {
+        if (isReadingNote) return;
+
         pauseMenuUI.SetActive(true);
         isGamePaused = true;
         Time.timeScale = 0f;
@@ -101,7 +110,6 @@ public class UIManager : MonoBehaviour
 
         if (fpsController != null) fpsController.isPaused = true;
 
-        // Stop voice recognition on pause
         if (voiceRecognizer != null)
             voiceRecognizer.StopVoiceRecognition();
     }
@@ -112,15 +120,52 @@ public class UIManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1f;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Lock cursor only if not reading a note
+        if (!isReadingNote)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         if (fpsController != null) fpsController.isPaused = false;
 
         if (voiceRecognizer != null)
         {
-            voiceRecognizer.ResetRecordingTimer();  // Reset the recording timer
-            voiceRecognizer.StartVoiceRecognition(); // Resume recognition
+            voiceRecognizer.ResetRecordingTimer();
+            voiceRecognizer.StartVoiceRecognition();
+        }
+    }
+
+    public void SetReadingNoteState(bool reading)
+    {
+        isReadingNote = reading;
+
+        if (reading)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+
+            if (fpsController != null) fpsController.isPaused = true;
+            if (voiceRecognizer != null) voiceRecognizer.StopVoiceRecognition();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+
+            if (fpsController != null) fpsController.isPaused = false;
+            if (voiceRecognizer != null)
+            {
+                voiceRecognizer.ResetRecordingTimer();
+                voiceRecognizer.StartVoiceRecognition();
+            }
         }
     }
 
@@ -138,6 +183,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         isGamePaused = false;
         gameStarted = false;
+        isReadingNote = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
