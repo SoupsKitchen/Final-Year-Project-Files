@@ -3417,6 +3417,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 264711083}
+    - targetCorrespondingSourceObject: {fileID: 6573433989188213148, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1581285644}
   m_SourcePrefab: {fileID: 100100000, guid: b3b9cb5ef8a108540a7f01287b4823eb, type: 3}
 --- !u!4 &1219680248 stripped
 Transform:
@@ -4522,6 +4526,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3669ea3b6346b1b4ea8ac76d9d4ad762, type: 3}
+--- !u!1 &1581285640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6573433989188213148, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1201599514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &1581285643 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 911937481909150847, guid: b3b9cb5ef8a108540a7f01287b4823eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1201599514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1581285644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581285640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6127e79169e77364f8fc6922e4fe3961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLight: {fileID: 1581285643}
+  minTimeBetweenFlickers: 15
+  maxTimeBetweenFlickers: 60
+  flickerDuration: 1
+  minFlickerIntensity: 0
+  maxFlickerIntensity: 1000
+  stableIntensity: 1000
+  flickerSpeed: 0.05
 --- !u!114 &1611592803 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8590888098732163955, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
