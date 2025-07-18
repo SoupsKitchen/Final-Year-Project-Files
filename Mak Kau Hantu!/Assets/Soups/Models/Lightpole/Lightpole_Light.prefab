@@ -189,10 +189,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLight: {fileID: 7635502205446090782}
-  minTimeBetweenFlickers: 45
-  maxTimeBetweenFlickers: 180
+  minTimeBetweenFlickers: 20
+  maxTimeBetweenFlickers: 120
   flickerDuration: 1.5
-  minFlickerIntensity: 0
+  minFlickerIntensity: 50
   maxFlickerIntensity: 5000
   stableIntensity: 5000
   flickerSpeed: 0.05
