@@ -37,6 +37,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Stairs
+    second: {fileID: 2100000, guid: 8aee1ecb78156dd418127336bcf2187c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wood.001
     second: {fileID: 2100000, guid: be2618a8616308242b3f9543f93ef618, type: 2}
   - first:
