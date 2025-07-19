@@ -39,6 +39,15 @@ public class FPSControllerCharacter : MonoBehaviour
     [Header("Pause")]
     public bool isPaused = false;
 
+    [Header("Death")]
+    private PlayerDies _pD;
+
+    void Awake()
+    {
+        _pD = GetComponent<PlayerDies>();
+        _pD.enabled = false;
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -161,6 +170,11 @@ public class FPSControllerCharacter : MonoBehaviour
         Vector3 groundCheckPos = transform.position + Vector3.down * (controller.height / 2 - controller.skinWidth);
         Gizmos.color = isGrounded ? Color.green : Color.red;
         Gizmos.DrawWireSphere(groundCheckPos, groundCheckDistance);
+    }
+
+    public void Die()
+    {
+        _pD.enabled = true;
     }
 }
 

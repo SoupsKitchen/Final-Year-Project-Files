@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class State_Patrol : IState
 {
-    private float _runSpeed = 20f;
+    private float _runSpeed = 20f, _turnSpeed = 50f;
     private Pontianak_Behaviour _ctx;
 
     public State_Patrol(Pontianak_Behaviour ctx)
@@ -18,6 +18,7 @@ public class State_Patrol : IState
     {
         Debug.Log("Entered Patrol State!");
         _ctx.agent.speed = _runSpeed;
+        _ctx.agent.angularSpeed = _turnSpeed;
     }
 
     // Update is called once per frame

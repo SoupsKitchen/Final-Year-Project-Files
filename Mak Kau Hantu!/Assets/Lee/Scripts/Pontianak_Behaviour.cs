@@ -20,15 +20,17 @@ public class Pontianak_Behaviour : MonoBehaviour
     private bool _seesPlayer = false;
 
     //Mood Params
-    private float _anger
+    public float anger
     {
-        get => _anger;
-        set => _anger = Mathf.Clamp(value, 0f, 100f);
+        get => anger;
+        set => anger = Mathf.Clamp(value, 0f, 100f);
     }
-    public float _interest
+
+    public float DecayRate;
+    public float interest
     {
-        get => _interest;
-        set => _interest = Mathf.Clamp(value, 0f, 100f);
+        get => interest;
+        set => interest = Mathf.Clamp(value, 0f, 100f);
     }
 
     //Movement Params
@@ -57,6 +59,7 @@ public class Pontianak_Behaviour : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _halfCone = visionAngle / 2 * Mathf.Deg2Rad;
         StartCoroutine(Look());
+
     }
 
     void Update()
@@ -80,15 +83,15 @@ public class Pontianak_Behaviour : MonoBehaviour
                     _seesPlayer = true;
                     targetLocation = player;
 
-                    if (_anger >= 80f)
+                    if (anger >= 80f)
                     {
                         Debug.Log("Anger high enough, enter Chase!");
                         _stateMachine.ChangeState(chaseState);
                     }
                     else
                     {
-                        _interest += 5f; // Increase interest gradually
-                        Debug.Log("Anger too low. Gaining interest... Interest: " + _interest);
+                        interest += 5f; // Increase interest gradually
+                        Debug.Log("Anger too low. Gaining interest... Interest: " + interest);
                         _stateMachine.ChangeState(stalkState);
                     }
                 }
@@ -104,8 +107,8 @@ public class Pontianak_Behaviour : MonoBehaviour
 
     public void IncreaseAnger(float amount)
     {
-        _anger += amount;
-        Debug.Log("Anger Increased: " + _anger);
+        anger += amount;
+        Debug.Log("Anger Increased: " + anger);
     }
     public void UpdatePatrol()
     {
@@ -115,17 +118,18 @@ public class Pontianak_Behaviour : MonoBehaviour
         _patrolIdx = (_patrolIdx + 1) % patrolSpots.Count;
         Debug.Log("Next Patrol Index: " + _patrolIdx);
     }
-    public IEnumerator RandomizeState()
+    public IEnumerator ChaseTimer()
     {
-        while (true)
+        while (anger >= 0f)
         {
-            int idx = Random.Range(0, _allStates.Count);
-            _stateMachine.ChangeState(_allStates[idx]);
-            yield return new WaitForSeconds(5f);
+            anger -= DecayRate;
+            if (anger <= 0f)
+            {
+                _stateMachine.ChangeState(patrolState);
+            }
+            yield return new WaitForSeconds(0.1f);
         }
-
     }
-    
     public IEnumerator ChooseRandomPoint()
     {
         while (true)
@@ -165,5 +169,12 @@ public class Pontianak_Behaviour : MonoBehaviour
             yield return new WaitForSeconds(5f);
         }
     }
-
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            FPSControllerCharacter FPS = collision.gameObject.GetComponent<FPSControllerCharacter>();
+            FPS.Die();
+        }
+    }
 }
