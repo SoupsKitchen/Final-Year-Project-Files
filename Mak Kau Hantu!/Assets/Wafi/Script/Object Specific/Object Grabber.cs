@@ -25,8 +25,11 @@ public class ObjectGrabber : MonoBehaviour
         {
             if (heldObject == null)
             {
-                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                if (Physics.Raycast(ray, out RaycastHit hit, maxGrabDistance))
+                Vector3 rayOrigin = Camera.main.transform.position + Camera.main.transform.forward * 0.1f;
+                Ray ray = new Ray(rayOrigin, Camera.main.transform.forward);
+                int layerMask = ~LayerMask.GetMask("Player");
+
+                if (Physics.Raycast(ray, out RaycastHit hit, maxGrabDistance, layerMask))
                 {
                     if (hit.collider.CompareTag("Grabbable"))
                     {

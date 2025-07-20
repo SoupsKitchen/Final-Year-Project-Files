@@ -21,7 +21,10 @@ public class CursorHighlighter : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, checkDistance))
+        // Create a layer mask that ignores the "Player" layer
+        int layerMask = ~LayerMask.GetMask("Player");
+
+        if (Physics.Raycast(ray, out hit, checkDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
