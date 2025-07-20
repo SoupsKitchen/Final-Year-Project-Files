@@ -42,12 +42,6 @@ public class FPSControllerCharacter : MonoBehaviour
     [Header("Death")]
     private PlayerDies _pD;
 
-    void Awake()
-    {
-        _pD = GetComponent<PlayerDies>();
-        _pD.enabled = false;
-    }
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

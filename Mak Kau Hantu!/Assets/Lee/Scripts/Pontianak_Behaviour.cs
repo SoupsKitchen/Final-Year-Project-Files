@@ -18,12 +18,17 @@ public class Pontianak_Behaviour : MonoBehaviour
     public float visionAngle;
     private float _halfCone;
     private bool _seesPlayer = false;
+    [SerializeField] private float _anger;
 
     //Mood Params
     public float anger
     {
-        get => anger;
-        set => anger = Mathf.Clamp(value, 0f, 100f);
+        get => _anger;
+        set
+        {
+            _anger = Mathf.Clamp(value, 0f, 100f);
+            Debug.Log("Pontianak anger set to: " + _anger);
+        }
     }
 
     public float DecayRate;

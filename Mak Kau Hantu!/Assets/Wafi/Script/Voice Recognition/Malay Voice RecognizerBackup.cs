@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Events;
@@ -29,7 +29,7 @@ public class MalayVoiceRecognizer : MonoBehaviour
         "aku cabar kau", "kau tak berani", "hantu pengecut", "muncul", "serang aku"
     };
 
-    public float angerIncreaseAmount = 10f;
+    public float angerIncreaseAmount = 15f;
     public float angerDecreaseAmount = 10f;
 
     private Coroutine voiceLoopRoutine;
@@ -152,10 +152,8 @@ public class MalayVoiceRecognizer : MonoBehaviour
     {
         var response = JSON.Parse(jsonResponse);
         string spokenText = response["text"];
-        if (string.IsNullOrEmpty(spokenText)) return;
-
-        spokenText = spokenText.ToLower();
         string logLine = "Recognized Text: " + spokenText;
+
         Debug.Log(logLine);
         onLog?.Invoke(logLine);
 
@@ -170,32 +168,38 @@ public class MalayVoiceRecognizer : MonoBehaviour
         lastRecognizedCommand = spokenText;
         lastCommandTime = Time.time;
 
-        int angerWordCount = 0;
-        int repelWordCount = 0;
+        foreach (string word in ghostRepelWords)
+        {
+            if (spokenText.Contains(word))
+            {
+                Debug.Log("Voice Command Detected: Repel Ghost");
+                ghostController?.RunAwayFromPlayer();
+
+                if (pontianakBehaviour != null)
+                {
+                    pontianakBehaviour.anger -= angerDecreaseAmount;
+                    Debug.Log($"Pontianak anger decreased by {angerDecreaseAmount}");
+                }
+
+                return;
+            }
+        }
 
         foreach (string word in ghostAngerWords)
         {
             if (spokenText.Contains(word))
-                angerWordCount++;
-        }
-
-        foreach (string word in ghostRepelWords)
-        {
-            if (spokenText.Contains(word))
-                repelWordCount++;
-        }
-
-        float angerChange = (angerWordCount * angerIncreaseAmount) - (repelWordCount * angerDecreaseAmount);
-
-        if (angerChange != 0f && pontianakBehaviour != null)
-        {
-            pontianakBehaviour.anger += angerChange;
-            Debug.Log($"Pontianak anger changed by {angerChange}, new anger: {pontianakBehaviour.anger}");
-
-            if (angerChange > 0)
+            {
+                Debug.Log("Voice Command Detected: Anger Ghost");
                 ghostController?.ChasePlayerFaster();
-            else
-                ghostController?.RunAwayFromPlayer();
+
+                if (pontianakBehaviour != null)
+                {
+                    pontianakBehaviour.anger += angerIncreaseAmount;
+                    Debug.Log($"Pontianak anger increased by {angerIncreaseAmount}");
+                }
+
+                return;
+            }
         }
 
         if (spokenText.Contains("lari"))
@@ -204,4 +208,4 @@ public class MalayVoiceRecognizer : MonoBehaviour
             playerRunner?.RunForward();
         }
     }
-}
+}*/
