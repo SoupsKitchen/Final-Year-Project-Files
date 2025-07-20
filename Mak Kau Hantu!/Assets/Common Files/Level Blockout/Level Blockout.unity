@@ -446,11 +446,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightpole_Light (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 612027902614139921, guid: 82c21241b09f82046b9ffeac4e20f132,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5772527666427338911, guid: 82c21241b09f82046b9ffeac4e20f132,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,26 +495,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635502205446090782, guid: 82c21241b09f82046b9ffeac4e20f132,
-        type: 3}
-      propertyPath: m_Range
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635502205446090782, guid: 82c21241b09f82046b9ffeac4e20f132,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 115
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635502205446090782, guid: 82c21241b09f82046b9ffeac4e20f132,
-        type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7635502205446090782, guid: 82c21241b09f82046b9ffeac4e20f132,
-        type: 3}
-      propertyPath: m_BounceIntensity
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
