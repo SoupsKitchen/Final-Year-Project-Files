@@ -155,11 +155,14 @@ public class MalayVoiceRecognizer : MonoBehaviour
         if (string.IsNullOrEmpty(spokenText)) return;
 
         spokenText = spokenText.ToLower();
-        string logLine = "Recognized Text: " + spokenText;
-        Debug.Log(logLine);
-        onLog?.Invoke(logLine);
+        Debug.Log("Recognized Text: " + spokenText);
+        onLog?.Invoke("Recognized Text: " + spokenText);
 
-        voiceDemoUI?.ShowRecognizedText(spokenText);
+        // Fix: Show the recognized text
+        if (voiceDemoUI != null)
+        {
+            voiceDemoUI.ShowRecognizedText(spokenText);
+        }
 
         if (spokenText == lastRecognizedCommand && Time.time - lastCommandTime < commandCooldown)
         {

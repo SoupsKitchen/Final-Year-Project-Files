@@ -38,7 +38,7 @@ public class AI_Master_Behaviour : MonoBehaviour
             EndNight();
         }
 
-        Debug.Log($"Current Game Hour: {currentGameHour}, Floor: {currentHourInt}, Last Called: {lastCalledHour}");
+       
     }
 
     void OnHour(int hour)

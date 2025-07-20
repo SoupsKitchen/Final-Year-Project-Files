@@ -12,31 +12,60 @@ public class VoiceDemoUI : MonoBehaviour
 
     void Start()
     {
-        recognizer = FindObjectOfType<MalayVoiceRecognizer>();
+        // Find recognizer even if it's in a disabled GameObject
+        recognizer = FindObjectOfType<MalayVoiceRecognizer>(true);
 
-        // Removed recognizer.onLog.AddListener(AppendLog); — no more log spam in UI
+        if (recognizer == null)
+        {
+            Debug.LogWarning("MalayVoiceRecognizer not found in scene.");
+        }
 
         if (startButton != null)
-            startButton.onClick.AddListener(() => recognizer?.StartVoiceRecognition());
+        {
+            startButton.onClick.AddListener(() =>
+            {
+                if (recognizer != null)
+                {
+                    recognizer.StartVoiceRecognition();
+                    Debug.Log("Voice recognition started from demo UI.");
+                }
+            });
+        }
 
         if (stopButton != null)
-            stopButton.onClick.AddListener(() => recognizer?.StopVoiceRecognition());
+        {
+            stopButton.onClick.AddListener(() =>
+            {
+                if (recognizer != null)
+                {
+                    recognizer.StopVoiceRecognition();
+                    Debug.Log("Voice recognition stopped from demo UI.");
+                }
+            });
+        }
     }
 
-    // Used only when we want to show recognized text
+    // Display recognized text in the UI
     public void ShowRecognizedText(string message)
     {
-        debugText.text = message;
+        if (debugText != null)
+        {
+            debugText.text = "Recognized: " + message;
+        }
+        else
+        {
+            Debug.LogWarning("debugText (TMP) is not assigned in VoiceDemoUI.");
+        }
     }
 
     public void ClearLog()
     {
-        debugText.text = "";
+        if (debugText != null)
+            debugText.text = "";
     }
 
     void OnDisable()
     {
-        MalayVoiceRecognizer recognizer = FindObjectOfType<MalayVoiceRecognizer>();
         recognizer?.StopVoiceRecognition();
     }
 }

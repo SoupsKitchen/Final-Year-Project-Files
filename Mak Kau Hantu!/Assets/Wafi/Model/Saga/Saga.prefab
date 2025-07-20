@@ -2303,6 +2303,7 @@ GameObject:
   - component: {fileID: 7184956227451201810}
   - component: {fileID: -5195595647236446176}
   - component: {fileID: 722598829153722048}
+  - component: {fileID: -404364354597867699}
   m_Layer: 0
   m_Name: Saga
   m_TagString: Untagged
@@ -2381,6 +2382,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3052764, y: 0.1585339, z: 0.11878455}
   m_Center: {x: 1.1296833, y: 1.0700586, z: 1.6663767}
+--- !u!208 &-404364354597867699
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471610047794883732}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5, y: 1, z: 2.585}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1.13, y: 1, z: 2.63}
+  m_TimeToStationary: 0.5
 --- !u!1 &3549854399228555369
 GameObject:
   m_ObjectHideFlags: 0
