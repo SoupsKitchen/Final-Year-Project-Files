@@ -1,32 +1,71 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDies : MonoBehaviour
 {
-    public GameObject deathScreen;
-    void OnEnable()
-    {
-        FPSControllerCharacter FPS = GetComponent<FPSControllerCharacter>();
-        if (FPS != null)
-        {
-            FPS.enabled = false;
-        }
-        else
-        {
-            Debug.LogWarning("FPS controller not found!");
-        }
+    public GameObject deathScreen;       // The death screen panel (already in scene)
+    public Button quitButton;            // Button to quit the game
+    public Button mainMenuButton;        // Button to go to main menu
+    public GameObject mainMenuPanel;     // Main menu panel (already in scene)
+    public GameObject playerObject;      // Player GameObject to disable
 
+    private bool isDead = false;
+
+    void Update()
+    {
+        if (!isDead && Input.GetKeyDown(KeyCode.K)) // For testing
+        {
+            KillPlayer();
+        }
+    }
+
+    void KillPlayer()
+    {
+        isDead = true;
+
+        // Disable player
+        if (playerObject != null)
+            playerObject.SetActive(false);
+
+        // Show death screen
         if (deathScreen != null)
         {
-            Instantiate(deathScreen);
+            deathScreen.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            // Assign button actions
+            if (quitButton != null)
+            {
+                quitButton.onClick.RemoveAllListeners();
+                quitButton.onClick.AddListener(QuitGame);
+            }
+
+            if (mainMenuButton != null)
+            {
+                mainMenuButton.onClick.RemoveAllListeners();
+                mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+            }
         }
-        else
-        {
-            Debug.LogWarning("The death screen prefab isn't added in!");
-        }
-        
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+
+        if (deathScreen != null) deathScreen.SetActive(false);
+        if (mainMenuPanel != null) mainMenuPanel.SetActive(true);
+
+        isDead = false; // Allow player to die again after returning
     }
 }

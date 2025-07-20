@@ -170,11 +170,20 @@ public class FPSControllerCharacter : MonoBehaviour
     {
         _pD.enabled = true;
     }
+    public void ResetControllerState()
+    {
+        // Reset any internal movement flags, timers, crouch/sprint state, etc.
+        isPaused = false;
+        isCrouching = false;
+        // Add more resets here if needed
+    }
+
 }
 
+
 public enum MovementState
-{
+    {
     Walking,
     Sprinting,
     Crouching
-}
+    }

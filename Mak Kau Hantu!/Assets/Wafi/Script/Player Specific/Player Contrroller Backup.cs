@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,4 +43,13 @@ public class PlayerContrroller : MonoBehaviour
             previousSpeed = currentSpeed;
         }
     }
+    public void ResetControllerState()
+    {
+        // Reset any internal movement flags, timers, crouch/sprint state, etc.
+        isPaused = false;
+        isCrouching = false;
+        isSprinting = false;
+        // Add more resets here if needed
+    }
 }
+*/

@@ -27,30 +27,45 @@ public class UIManager : MonoBehaviour
     public GameObject ghost;
     public FPSControllerCharacter fpsController;
 
+    private Vector3 initialPlayerPosition;
+    private Quaternion initialPlayerRotation;
+    private Vector3 initialGhostPosition;
+    private Quaternion initialGhostRotation;
+
     private bool isGamePaused = false;
     private bool gameStarted = false;
     public bool isReadingNote = false;
 
     private MalayVoiceRecognizer voiceRecognizer;
 
-    public bool IsGamePaused()
-    {
-        return isGamePaused;
-    }
+    public bool IsGamePaused() => isGamePaused;
 
     void Start()
     {
+        // Store initial spawn positions
+        if (player != null)
+        {
+            initialPlayerPosition = player.transform.position;
+            initialPlayerRotation = player.transform.rotation;
+            player.SetActive(false);
+        }
+
+        if (ghost != null)
+        {
+            initialGhostPosition = ghost.transform.position;
+            initialGhostRotation = ghost.transform.rotation;
+            ghost.SetActive(false);
+        }
+
         mainMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
 
-        if (player != null) player.SetActive(false);
-        if (ghost != null) ghost.SetActive(false);
-
         voiceRecognizer = FindObjectOfType<MalayVoiceRecognizer>();
 
+        // Assign button events
         startButton.onClick.AddListener(StartGame);
         mainMenuQuitButton.onClick.AddListener(QuitGame);
         resumeButton.onClick.AddListener(ResumeGame);
@@ -64,19 +79,17 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (gameStarted && Input.GetKeyDown(KeyCode.Escape))
+        if (gameStarted && Input.GetKeyDown(KeyCode.Escape) && !isReadingNote)
         {
-            if (isReadingNote) return;
-
-            if (!isGamePaused)
-                PauseGame();
-            else
-                ResumeGame();
+            if (!isGamePaused) PauseGame();
+            else ResumeGame();
         }
     }
 
     public void StartGame()
     {
+        ResetGameState();
+
         mainMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
@@ -120,17 +133,8 @@ public class UIManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1f;
 
-        // Lock cursor only if not reading a note
-        if (!isReadingNote)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        Cursor.lockState = isReadingNote ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isReadingNote;
 
         if (fpsController != null) fpsController.isPaused = false;
 
@@ -171,35 +175,25 @@ public class UIManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
+        mainMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
-        mainMenuUI.SetActive(true);
-
-        if (player) player.SetActive(false);
-        if (ghost) ghost.SetActive(false);
 
         Time.timeScale = 1f;
         isGamePaused = false;
         gameStarted = false;
         isReadingNote = false;
 
+        if (player) player.SetActive(false);
+        if (ghost) ghost.SetActive(false);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         if (voiceRecognizer != null)
             voiceRecognizer.StopVoiceRecognition();
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("Quitting Game");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 
     public void ShowFinalScreen()
@@ -211,6 +205,7 @@ public class UIManager : MonoBehaviour
         voiceTesterPanel.SetActive(false);
 
         Time.timeScale = 0f;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -222,9 +217,6 @@ public class UIManager : MonoBehaviour
     {
         instructionMenuUI.SetActive(true);
         mainMenuUI.SetActive(false);
-        pauseMenuUI.SetActive(false);
-        finalScreenUI.SetActive(false);
-        voiceTesterPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -234,7 +226,6 @@ public class UIManager : MonoBehaviour
     {
         instructionMenuUI.SetActive(false);
         mainMenuUI.SetActive(true);
-        voiceTesterPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -257,5 +248,53 @@ public class UIManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    /// <summary>
+    /// Fully resets game state — positions, internal flags, etc.
+    /// </summary>
+    private void ResetGameState()
+    {
+        if (player != null)
+        {
+            player.transform.position = initialPlayerPosition;
+            player.transform.rotation = initialPlayerRotation;
+        }
+
+        if (ghost != null)
+        {
+            ghost.transform.position = initialGhostPosition;
+            ghost.transform.rotation = initialGhostRotation;
+        }
+
+        // Reset other systems like items, win conditions, timers etc.
+        // For example:
+        // FindObjectOfType<ItemManager>()?.ResetItems();
+        // FindObjectOfType<WinCondition>()?.ResetWin();
+
+        isReadingNote = false;
+        isGamePaused = false;
+        Time.timeScale = 1f;
+
+        if (voiceRecognizer != null)
+        {
+            voiceRecognizer.ResetRecordingTimer();
+            voiceRecognizer.StartVoiceRecognition();
+        }
+
+        if (fpsController != null)
+        {
+            fpsController.ResetControllerState();
+        }
     }
 }

@@ -46,7 +46,6 @@ public class AI_Master_Behaviour : MonoBehaviour
         Pontianak_Behaviour _pontianakBehaviour = _pontianak.GetComponent<Pontianak_Behaviour>();
         if (_pontianakBehaviour != null)
         {
-            Debug.Log("It's the hour!");
             _pontianakBehaviour.UpdatePatrol();
         }
     }
