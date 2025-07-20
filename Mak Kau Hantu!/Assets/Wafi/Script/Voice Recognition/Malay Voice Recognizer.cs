@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Events;
 using SimpleJSON;
 
 public class MalayVoiceRecognizer : MonoBehaviour
 {
-    public string witApiToken = "YZWBZXKB43VPNBPIFZZMFKWY27SSHE3O";
+    public string witApiToken = "YOUR_API_TOKEN_HERE";
     private AudioClip recordedClip;
     private const int sampleRate = 16000;
     private bool isRecording = false;
@@ -33,25 +32,19 @@ public class MalayVoiceRecognizer : MonoBehaviour
     public float angerDecreaseAmount = 10f;
 
     private Coroutine voiceLoopRoutine;
-    private VoiceDemoUI voiceDemoUI;
-
-    [Header("Debug Output")]
-    public UnityEvent<string> onLog;
-
-    private float currentRecordTime = 0f;
+    private VoiceRecognitionPanel ui;
 
     void Awake()
     {
-        voiceDemoUI = FindObjectOfType<VoiceDemoUI>();
+        ui = FindObjectOfType<VoiceRecognitionPanel>(true);
     }
 
     public void StartVoiceRecognition()
     {
         if (voiceLoopRoutine == null)
         {
-            voiceDemoUI?.ClearLog();
             Debug.Log("Voice recognition started.");
-            onLog?.Invoke("Voice recognition started.");
+            ClearUI();
             voiceLoopRoutine = StartCoroutine(VoiceLoop());
         }
     }
@@ -60,34 +53,29 @@ public class MalayVoiceRecognizer : MonoBehaviour
     {
         if (voiceLoopRoutine != null)
         {
+            Debug.Log("Voice recognition stopped.");
             StopCoroutine(voiceLoopRoutine);
             voiceLoopRoutine = null;
-            Debug.Log("Voice recognition stopped.");
-            onLog?.Invoke("Voice recognition stopped.");
         }
     }
 
     public void ResetRecordingTimer()
     {
-        currentRecordTime = 0f;
-
         if (voiceLoopRoutine != null)
         {
+            Debug.Log("Voice recognition reset.");
             StopCoroutine(voiceLoopRoutine);
             voiceLoopRoutine = null;
         }
 
         if (isRecording)
         {
+            Debug.Log("Stopping microphone.");
             Microphone.End(null);
             isRecording = false;
-            Debug.Log("Recording manually reset and stopped.");
-            onLog?.Invoke("Recording manually reset and stopped.");
         }
 
-        voiceDemoUI?.ClearLog();
-        Debug.Log("Voice recognition restarted after reset.");
-        onLog?.Invoke("Voice recognition restarted after reset.");
+        ClearUI();
         voiceLoopRoutine = StartCoroutine(VoiceLoop());
     }
 
@@ -104,19 +92,17 @@ public class MalayVoiceRecognizer : MonoBehaviour
     {
         if (isRecording) yield break;
 
+        Debug.Log("Recording now...");
         isRecording = true;
-
         recordedClip = Microphone.Start(null, false, 5, sampleRate);
-        Debug.Log("Recording started...");
-        onLog?.Invoke("Recording started...");
         yield return new WaitForSeconds(5f);
         Microphone.End(null);
-        Debug.Log("Recording ended.");
-        onLog?.Invoke("Recording ended.");
+        Debug.Log("Recording finished.");
 
         byte[] wavData = WavUtility.FromAudioClip(recordedClip);
+        Debug.Log("Sending audio to Wit.ai...");
         yield return StartCoroutine(SendToWit(wavData));
-
+        Debug.Log("Response received.");
         isRecording = false;
     }
 
@@ -127,24 +113,16 @@ public class MalayVoiceRecognizer : MonoBehaviour
         www.SetRequestHeader("Authorization", "Bearer " + witApiToken);
         www.SetRequestHeader("Content-Type", "audio/wav");
 
-        Debug.Log("Sending audio to Wit.ai...");
-        onLog?.Invoke("Sending audio to Wit.ai...");
-
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
         {
             string json = www.downloadHandler.text;
-            Debug.Log("Wit.ai Response received.");
-            onLog?.Invoke("Wit.ai Response received.");
-            Debug.Log("Wit.ai Response: " + json);
             HandleWitResponse(json);
         }
         else
         {
-            string errorMsg = "Wit.ai Error: " + www.error;
-            Debug.LogError(errorMsg);
-            onLog?.Invoke(errorMsg);
+            Debug.Log("Wit.ai Error: " + www.error);
         }
     }
 
@@ -155,20 +133,13 @@ public class MalayVoiceRecognizer : MonoBehaviour
         if (string.IsNullOrEmpty(spokenText)) return;
 
         spokenText = spokenText.ToLower();
-        Debug.Log("Recognized Text: " + spokenText);
-        onLog?.Invoke("Recognized Text: " + spokenText);
 
-        // Fix: Show the recognized text
-        if (voiceDemoUI != null)
-        {
-            voiceDemoUI.ShowRecognizedText(spokenText);
-        }
+        // ✅ Display only Malay text in UI
+        ui?.DisplayRecognizedText(spokenText);
 
+        // Avoid duplicate triggers
         if (spokenText == lastRecognizedCommand && Time.time - lastCommandTime < commandCooldown)
-        {
-            Debug.Log("Ignored: Same command repeated too soon.");
             return;
-        }
 
         lastRecognizedCommand = spokenText;
         lastCommandTime = Time.time;
@@ -178,14 +149,12 @@ public class MalayVoiceRecognizer : MonoBehaviour
 
         foreach (string word in ghostAngerWords)
         {
-            if (spokenText.Contains(word))
-                angerWordCount++;
+            if (spokenText.Contains(word)) angerWordCount++;
         }
 
         foreach (string word in ghostRepelWords)
         {
-            if (spokenText.Contains(word))
-                repelWordCount++;
+            if (spokenText.Contains(word)) repelWordCount++;
         }
 
         float angerChange = (angerWordCount * angerIncreaseAmount) - (repelWordCount * angerDecreaseAmount);
@@ -193,7 +162,6 @@ public class MalayVoiceRecognizer : MonoBehaviour
         if (angerChange != 0f && pontianakBehaviour != null)
         {
             pontianakBehaviour.anger += angerChange;
-            Debug.Log($"Pontianak anger changed by {angerChange}, new anger: {pontianakBehaviour.anger}");
 
             if (angerChange > 0)
                 ghostController?.ChasePlayerFaster();
@@ -203,8 +171,12 @@ public class MalayVoiceRecognizer : MonoBehaviour
 
         if (spokenText.Contains("lari"))
         {
-            Debug.Log("Voice Command Detected: Run");
             playerRunner?.RunForward();
         }
+    }
+
+    void ClearUI()
+    {
+        ui?.DisplayRecognizedText("");
     }
 }
