@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.AI;
 public class Pontianak_Behaviour : MonoBehaviour
 {
     //Time Table related Params
     public List<Transform> patrolSpots;
-    public Transform patrolCenter;
+    private Transform _patrolCenter;
     private int _patrolIdx = 0;
 
     //Animations Params
@@ -16,18 +17,19 @@ public class Pontianak_Behaviour : MonoBehaviour
 
     //Detection Params
     public float visionAngle;
+    [SerializeField] private float _distance;
     private float _halfCone;
     private bool _seesPlayer = false;
-    [SerializeField] private float _anger;
+    [SerializeField] private Transform _eyes;
 
     //Mood Params
     public float anger
     {
-        get => _anger;
+        get => anger;
         set
         {
-            _anger = Mathf.Clamp(value, 0f, 100f);
-            Debug.Log("Pontianak anger set to: " + _anger);
+            anger = Mathf.Clamp(value, 0f, 100f);
+
         }
     }
 
@@ -39,14 +41,13 @@ public class Pontianak_Behaviour : MonoBehaviour
     }
 
     //Movement Params
-    public float maxMoveSpeed, turningSpeed, accelSpeed;
     public Transform targetLocation;
     public Transform player;
     public NavMeshAgent agent;
 
     //State Params
     private StateMachine _stateMachine;
-    private IState patrolState, idleState, stalkState, chaseState;
+    private IState patrolState, scaredState, stalkState, chaseState;
     private List<IState> _allStates;
 
     // Start is called before the first frame update
@@ -54,11 +55,11 @@ public class Pontianak_Behaviour : MonoBehaviour
     {
         _stateMachine = new StateMachine();
         patrolState = new State_Patrol(this);
-        idleState = new State_Idle(this);
+        scaredState = new State_Scared(this);
         stalkState = new State_Stalk(this);
         chaseState = new State_Chase(this);
 
-        _allStates = new List<IState> { patrolState, idleState, stalkState, chaseState };
+        _allStates = new List<IState> { patrolState, scaredState, stalkState, chaseState };
 
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -77,13 +78,15 @@ public class Pontianak_Behaviour : MonoBehaviour
         while (true)
         {
             float _cosFOV = Mathf.Cos(_halfCone);
-            Vector3 toPlayer = (player.position - transform.position).normalized;
-            float dp = Vector3.Dot(transform.forward, toPlayer);
+            Vector3 toPlayer = (player.position - _eyes.position).normalized;
+            float dp = Vector3.Dot(_eyes.forward, toPlayer);
             RaycastHit hit;
 
-            if (dp > _cosFOV && Physics.Raycast(transform.position, player.position - transform.position, out hit, 100f))
+            Debug.DrawRay(_eyes.position, toPlayer * 100f, Color.red, 0.1f);
+
+            if (dp > _cosFOV && Physics.Raycast(_eyes.position, toPlayer, out hit, 100f))
             {
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player"))
                 {
                     _seesPlayer = true;
                     targetLocation = player;
@@ -114,10 +117,42 @@ public class Pontianak_Behaviour : MonoBehaviour
     {
         anger += amount;
         Debug.Log("Anger Increased: " + anger);
+
+        if (anger <= 80 && interest <= 50)
+        {
+            bool foundValidPoint = false;
+            int attempts = 0;
+
+            while (!foundValidPoint && attempts < 10)
+            {
+                Vector3 awayDirection = (transform.position - player.position).normalized;
+                Vector3 randomOffset = Random.insideUnitSphere * 25f;
+                randomOffset.y = 0;
+
+                Vector3 runCandidate = transform.position + awayDirection * _distance + randomOffset;
+
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(runCandidate, out hit, 2f, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(hit.position);
+                    _stateMachine.ChangeState(scaredState);
+                    foundValidPoint = true;
+                    break;
+                }
+
+                attempts++;
+            }
+
+            if (!foundValidPoint)
+            {
+                Debug.LogWarning("A valid location has not been found!");
+            }
+        }
     }
+
     public void UpdatePatrol()
     {
-        patrolCenter = patrolSpots[_patrolIdx];
+        _patrolCenter = patrolSpots[_patrolIdx];
         agent.SetDestination(patrolSpots[_patrolIdx].position);
         _stateMachine.ChangeState(patrolState);
         _patrolIdx = (_patrolIdx + 1) % patrolSpots.Count;
@@ -140,7 +175,7 @@ public class Pontianak_Behaviour : MonoBehaviour
         while (true)
         {
             Vector3 rawPoint = Vector3.zero;
-            NavMeshHit hit = new NavMeshHit(); // ✅ Initialized here
+            NavMeshHit hit = new NavMeshHit();
             bool foundValidPoint = false;
             int attempts = 0;
 
@@ -149,7 +184,7 @@ public class Pontianak_Behaviour : MonoBehaviour
             {
                 Vector3 randomOffset = Random.insideUnitSphere * 25f;
                 randomOffset.y = 0;
-                rawPoint = patrolCenter.position + randomOffset;
+                rawPoint = _patrolCenter.position + randomOffset;
 
                 if (NavMesh.SamplePosition(rawPoint, out hit, 25f, NavMesh.AllAreas))
                 {
@@ -158,7 +193,7 @@ public class Pontianak_Behaviour : MonoBehaviour
                 else
                 {
                     attempts++;
-                    yield return null; // wait a frame before trying again
+                    yield return null;
                 }
             }
 

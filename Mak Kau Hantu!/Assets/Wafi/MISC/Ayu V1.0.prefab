@@ -218,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 695083719387105112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2195,7 +2195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6097903053413686149}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9848978, z: -0, w: 0.17313688}
+  m_LocalRotation: {x: 0, y: -0.9848985, z: 0, w: 0.17313263}
   m_LocalPosition: {x: 5.416702, y: 0.0000019073486, z: -33.238804}
   m_LocalScale: {x: 7.6, y: 7.6, z: 7.6}
   m_ConstrainProportionsScale: 1
@@ -2339,9 +2339,9 @@ MonoBehaviour:
   patrolCenter: {fileID: 0}
   anim: {fileID: 0}
   visionAngle: 90
-  maxMoveSpeed: 0
-  turningSpeed: 0
-  accelSpeed: 0
+  _eyes: {fileID: 8345429961642172657}
+  _anger: 0
+  DecayRate: 0
   targetLocation: {fileID: 0}
   player: {fileID: 0}
   agent: {fileID: 0}
@@ -2655,7 +2655,7 @@ Transform:
   m_GameObject: {fileID: 7122243579237437066}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000005597971, y: 0.000004050807, z: -0.00011783116, w: 1}
-  m_LocalPosition: {x: 0.00001315286, y: 1.1414454, z: 0.006194922}
+  m_LocalPosition: {x: 0, y: 1.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
