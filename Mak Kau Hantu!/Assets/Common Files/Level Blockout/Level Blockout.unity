@@ -5950,10 +5950,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2643459940143937665, guid: db096e2839e43d34d9ed0211eb56442a,
+        type: 3}
+      propertyPath: m_Name
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917326872923996790, guid: db096e2839e43d34d9ed0211eb56442a,
+        type: 3}
+      propertyPath: m_text
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 2964332089732782745, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3020675781127884625, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
@@ -6065,7 +6075,7 @@ PrefabInstance:
     - target: {fileID: 8201860981629661245, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8201860981629661245, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
