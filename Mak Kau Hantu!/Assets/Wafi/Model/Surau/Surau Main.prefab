@@ -40121,6 +40121,7 @@ GameObject:
   - component: {fileID: 2925436702833792050}
   - component: {fileID: 139233189301565321}
   - component: {fileID: 7161545733389372306}
+  - component: {fileID: 1759869203653721259}
   m_Layer: 0
   m_Name: Surau Main
   m_TagString: Untagged
@@ -40586,6 +40587,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 98, y: 98, z: 27}
   m_Center: {x: -0.44, y: 0, z: -6.4}
+--- !u!208 &1759869203653721259
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681008543934048336}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 90, y: 90, z: 90}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3684161410576590886
 GameObject:
   m_ObjectHideFlags: 0

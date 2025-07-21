@@ -32,10 +32,11 @@ public class Pontianak_Behaviour : MonoBehaviour
     }
 
     public float DecayRate;
+    [SerializeField] private float _interest;
     public float interest
     {
-        get => interest;
-        set => interest = Mathf.Clamp(value, 0f, 100f);
+        get => _interest;
+        set => _interest = Mathf.Clamp(value, 0f, 100f);
     }
 
     //Movement Params
@@ -53,7 +54,7 @@ public class Pontianak_Behaviour : MonoBehaviour
     {
         _stateMachine = new StateMachine();
         patrolState = new State_Patrol(this);
-        scaredState = new State_Scared(this);
+        //scaredState = new State_Scared(this);
         stalkState = new State_Stalk(this);
         chaseState = new State_Chase(this);
 
