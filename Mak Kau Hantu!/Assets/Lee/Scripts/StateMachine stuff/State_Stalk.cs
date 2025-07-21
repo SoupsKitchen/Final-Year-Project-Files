@@ -8,7 +8,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class State_Stalk : IState
 {
-    private float _runSpeed = 10f, angleSpeed = 20f;
+    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
     private float _minDistance = 10f, _maxDistance = 40f;
 
     private Transform _chosenSpot;
@@ -24,28 +24,26 @@ public class State_Stalk : IState
     public void OnEnter()
     {
         _ctx.agent.speed = _runSpeed;
-        _ctx.agent.angularSpeed = angleSpeed;
+        _ctx.agent.angularSpeed = _turnSpeed;
         GameObject[] spotGOs = GameObject.FindGameObjectsWithTag("Peek");
         _peekSpots = new List<Transform>(spotGOs.Select(go => go.transform));
         ChoosePeekSpot();
-        _ctx.agent.SetDestination(_chosenSpot.position);
-        Debug.Log("Pontianak is stalking.");
+        _ctx.targetLocation = _chosenSpot.position;
+        Debug.Log("Pontianak is stalking!");
     }
 
     // Update is called once per frame
     public void OnUpdate()
     {
-        Debug.Log(_ctx.player.transform);
-        // Rotate to always look at the player
-        Vector3 direction = (_ctx.player.position - _ctx.transform.position).normalized;
-        Quaternion targetRot = Quaternion.LookRotation(direction);
+        //Always look at player
+        Quaternion targetRot = Quaternion.LookRotation(_ctx.toPlayer);
         _ctx.transform.rotation = Quaternion.Slerp(_ctx.transform.rotation, targetRot, _ctx.agent.angularSpeed * Time.deltaTime);
 
         // If we reached the spot, pick another spot (or switch state)
         if (!_ctx.agent.pathPending && _ctx.agent.remainingDistance <= _ctx.agent.stoppingDistance + 0.5f)
         {
             ChoosePeekSpot();
-            _ctx.agent.SetDestination(_chosenSpot.position);
+            _ctx.targetLocation = _chosenSpot.position;
         }
     }
 
@@ -59,15 +57,10 @@ public class State_Stalk : IState
         var candidates = _peekSpots
             .Where(spot =>
             {
-                float d = Vector3.Distance(_ctx.player.position, spot.position);
+                float d = Vector3.Distance(_ctx.player.transform.position, spot.position);
                 return d >= _minDistance && d <= _maxDistance;
             })
             .ToList();
-
-        foreach (var entry in candidates)
-        {
-            Debug.Log("  • " + entry.name);
-        }
         
 
         if (candidates.Count == 0)
@@ -77,6 +70,5 @@ public class State_Stalk : IState
             }
 
         _chosenSpot = candidates[UnityEngine.Random.Range(0, candidates.Count)];
-        Debug.Log("Chosen spot is" + _chosenSpot.name);
     }
 }

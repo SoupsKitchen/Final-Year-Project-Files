@@ -5,55 +5,26 @@ using UnityEngine;
 
 public class AI_Master_Behaviour : MonoBehaviour
 {
-    public float currentGameHour = 0f; // 0 = 12:00 AM, 6 = 6:00 AM
-    public float gameEndHour = 6f;
-    public float realTimeDurationMinutes = 10f;
-
     private GameObject _pontianak;
-    private float secondsPerGameHour;
-    private float elapsedRealTime = 0f;
-    private int lastCalledHour = -1;
+    int _hourIdx = -1;
+    float minutesPerHour = 300f; //One minute is 60f.
 
-    void Start()
+    void Awake()
     {
         _pontianak = GameObject.FindGameObjectWithTag("Pontianak");
-        secondsPerGameHour = (realTimeDurationMinutes * 60f) / gameEndHour; // 300 seconds = 5 mins
+        
     }
-
-    void Update()
+    void Start()
     {
-        elapsedRealTime += Time.deltaTime;
-        currentGameHour = Mathf.Clamp(elapsedRealTime / secondsPerGameHour, 0f, gameEndHour);
-
-        int currentHourInt = Mathf.FloorToInt(currentGameHour);
-
-        if (currentHourInt != lastCalledHour && currentHourInt <= gameEndHour)
-        {
-            OnHour(currentHourInt);
-            lastCalledHour = currentHourInt;
-        }
-
-        if (currentGameHour >= gameEndHour)
-        {
-            EndNight();
-        }
-
-       
+        StartCoroutine(OnHour());
     }
-
-    void OnHour(int hour)
+    IEnumerator OnHour()
     {
-        Pontianak_Behaviour _pontianakBehaviour = _pontianak.GetComponent<Pontianak_Behaviour>();
-        if (_pontianakBehaviour != null)
-        {
-            _pontianakBehaviour.UpdatePatrol();
-        }
+        _hourIdx++;
+        Pontianak_Behaviour _pAI = _pontianak.GetComponent<Pontianak_Behaviour>();
+        _pAI.ProgressToNextSpot();
+        
+        yield return new WaitForSeconds(minutesPerHour);
     }
 
-    void EndNight()
-    {
-        Debug.Log("Night cycle complete.");
-        // Handle end-of-night logic
-        enabled = false; // Stop updating time
-    }
 }

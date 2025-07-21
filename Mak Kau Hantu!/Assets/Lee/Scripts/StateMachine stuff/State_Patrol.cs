@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class State_Patrol : IState
 {
-    private float _runSpeed = 20f, _turnSpeed = 50f;
+    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
     private Pontianak_Behaviour _ctx;
 
     public State_Patrol(Pontianak_Behaviour ctx)
@@ -16,7 +16,7 @@ public class State_Patrol : IState
     // Start is called before the first frame update
     public void OnEnter()
     {
-        Debug.Log("Entered Patrol State!");
+        Debug.Log("Pontianak is patrolling!");
         _ctx.agent.speed = _runSpeed;
         _ctx.agent.angularSpeed = _turnSpeed;
     }
@@ -24,17 +24,17 @@ public class State_Patrol : IState
     // Update is called once per frame
     public void OnUpdate()
     {
-        if (!_ctx.agent.pathPending && _ctx.agent.remainingDistance <= _ctx.agent.stoppingDistance + 0.5f)
+        if (_ctx.ReachedDestination())
         {
-            _ctx.StartCoroutine(_ctx.ChooseRandomPoint());
+            _ctx.StartCoroutine(_ctx.ChooseRandomSpot());
         }
     }
 
     public void OnExit()
     {
-        if (_ctx.ChooseRandomPoint() != null)
+        if (_ctx.ChooseRandomSpot() != null)
         {
-            _ctx.StopCoroutine(_ctx.ChooseRandomPoint());
+            _ctx.StopCoroutine(_ctx.ChooseRandomSpot());
         }
 
     }

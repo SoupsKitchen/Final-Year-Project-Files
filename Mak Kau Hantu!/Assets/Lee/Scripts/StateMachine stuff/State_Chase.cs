@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State_Chase : IState
 {
-    private float _runSpeed = 40f, _turnSpeed = 100f;
+    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
     private Pontianak_Behaviour _ctx;
 
     public State_Chase(Pontianak_Behaviour ctx)
@@ -15,6 +15,7 @@ public class State_Chase : IState
     public void OnEnter()
     {
         _ctx.agent.speed = _runSpeed;
+        _ctx.agent.acceleration = _accelSpeed;
         _ctx.agent.angularSpeed = _turnSpeed;
         Debug.Log("Pontianak has begun chasing!");
     }
@@ -22,20 +23,22 @@ public class State_Chase : IState
     // Update is called once per frame
     public void OnUpdate()
     {
-        _ctx.agent.SetDestination(_ctx.targetLocation.position);
-
-        //Once it reaches the location, the Pontianak will patrol around if it doesn't see the player
-        if (!_ctx.agent.pathPending && _ctx.agent.remainingDistance <= _ctx.agent.stoppingDistance + 0.5f && _ctx.ChooseRandomPoint() == null)
+        if (_ctx.seesPlayer())
         {
-            _ctx.StartCoroutine(_ctx.ChooseRandomPoint());
+            _ctx.targetLocation = _ctx.player.transform.position;
+        }
+        //Once it reaches the location, the Pontianak will patrol around if it doesn't see the player
+        else if (_ctx.ReachedDestination() && !_ctx.seesPlayer())
+        {
+            _ctx.StartCoroutine(_ctx.ChooseRandomSpot());
         }
     }
 
     public void OnExit()
     {
-        if (_ctx.ChooseRandomPoint() != null)
+        if (_ctx.ChooseRandomSpot() != null)
         {
-            _ctx.StopCoroutine(_ctx.ChooseRandomPoint());
+            _ctx.StopCoroutine(_ctx.ChooseRandomSpot());
         }
     }
 }

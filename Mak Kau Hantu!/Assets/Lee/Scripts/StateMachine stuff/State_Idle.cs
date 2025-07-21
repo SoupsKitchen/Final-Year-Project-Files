@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State_Idle : IState
 {
-    private float _runSpeed = 10f;
+    private float _runSpeed = 0f;
     private Pontianak_Behaviour _ctx;
 
     public State_Idle(Pontianak_Behaviour ctx)
@@ -16,6 +16,8 @@ public class State_Idle : IState
     public void OnEnter()
     {
         _ctx.agent.speed = _runSpeed;
+        _ctx.agent.acceleration = 0f;
+        _ctx.agent.angularSpeed = 0f;
         Debug.Log("Pontianak is idle!");
     }
 

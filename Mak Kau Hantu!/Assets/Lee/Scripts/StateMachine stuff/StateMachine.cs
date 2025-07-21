@@ -13,14 +13,13 @@ public class StateMachine
         {
             currentState.OnExit();
         }
-        else
-        {
-            currentState = newState;
-            currentState.OnEnter();
-        }
-        
-
+        currentState = newState;
+        currentState.OnEnter();
     }
 
+    public bool IsInState(IState state)
+    {
+        return currentState == state;
+    }
     public void Update() => currentState?.OnUpdate();
 }

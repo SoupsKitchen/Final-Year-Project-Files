@@ -7,213 +7,262 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Pontianak_Behaviour : MonoBehaviour
 {
-    //Time Table related Params
-    public List<Transform> patrolSpots;
-    private Transform _patrolCenter;
-    private int _patrolIdx = 0;
+    #region NavMeshAgent Params
+    public NavMeshAgent agent;
+    public GameObject player;
+    public Vector3 targetLocation;
+    #endregion
 
-    //Animations Params
-    public Animator anim;
+    #region States Params
+    private StateMachine _stateMachine;
+    private IState patrolState, scaredState, stalkState, chaseState, idleState;
+    public bool ReachedDestination()
+    {
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.5f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
-    //Detection Params
-    public float visionAngle;
-    [SerializeField] private float _distance;
-    private float _halfCone;
-    private bool _seesPlayer = false;
-    [SerializeField] private Transform _eyes;
+    }
+    #endregion
+
+    #region Mood Params
+    [Header("Mood Params")]
     [SerializeField] private float _anger;
-
-    //Mood Params
-
     public float anger
     {
         get => _anger;
-        set => _anger = Mathf.Clamp(value, 0f, 100f);
+        set
+        {
+            _anger = Mathf.Clamp(value, 0f, 100f);
+        }
     }
 
-    public float DecayRate;
-    [SerializeField] private float _interest;
+    private float _interest;
     public float interest
     {
         get => _interest;
-        set => _interest = Mathf.Clamp(value, 0f, 100f);
+        set
+        {
+            _interest = Mathf.Clamp(value, 0f, 100f);
+        }
     }
 
-    //Movement Params
-    public Transform targetLocation;
-    public Transform player;
-    public NavMeshAgent agent;
+    [SerializeField] private float angerDecayRate;
+    [SerializeField] private float _interestIncreaseRate;
+    [SerializeField] private float _interestDecayRate;
+    [SerializeField] private float _stalkThreshold;
+    public bool isResting { get; private set; } = false;
+    #endregion
 
-    //State Params
-    private StateMachine _stateMachine;
-    private IState patrolState, scaredState, stalkState, chaseState;
-    private List<IState> _allStates;
+    #region Patrolling Params
+    [Header("Patrolling Params")]
+    private int _patrolIdx = -1;
+    private Transform _currentPatrolPoint;
+    public List<Transform> patrolPoints;
+    #endregion
+
+    #region Sight Params
+    [Header("Pontianak Viewing Params")]
+    public Transform eyes;
+    public Vector3 toPlayer;
+    public bool seesPlayer()
+    {
+        float distanceToPlayer = Vector3.Distance(eyes.position, player.transform.position);
+        RaycastHit hit;
+
+        // Check within radius
+        if (distanceToPlayer < _viewRad)
+        {
+            // Check within view angle
+            float angleToPlayer = Vector3.Angle(eyes.forward, toPlayer);
+            if (angleToPlayer < _viewAng / 2f)
+            {
+                // Optional: Raycast to check line of sight
+                if (Physics.Raycast(eyes.position, toPlayer, out hit, distanceToPlayer))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    [SerializeField] private float _viewRad;
+    [Range(0, 360)] private float _viewAng = 90f;
+    #endregion
+
+    #region Unity stock methods
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            StartCoroutine(FindPlayerAgain());
+        }
+        agent = GetComponent<NavMeshAgent>();
+
+        _stateMachine = new StateMachine();
+        patrolState = new State_Patrol(this);
+        scaredState = new State_Scared(this);
+        stalkState = new State_Stalk(this);
+        chaseState = new State_Chase(this);
+        idleState = new State_Idle(this);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _stateMachine = new StateMachine();
-        patrolState = new State_Patrol(this);
-        //scaredState = new State_Scared(this);
-        stalkState = new State_Stalk(this);
-        chaseState = new State_Chase(this);
-
-        _allStates = new List<IState> { patrolState, scaredState, stalkState, chaseState };
-
-        agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        _halfCone = visionAngle / 2 * Mathf.Deg2Rad;
-        StartCoroutine(Look());
 
     }
 
+    // Update is called once per frame
     void Update()
     {
-        _stateMachine.Update();
-    }
+        toPlayer = (player.transform.position - eyes.position).normalized;
 
-    public IEnumerator Look()
-    {
-        while (true)
+        if (seesPlayer() && !isResting)
         {
-            float _cosFOV = Mathf.Cos(_halfCone);
-            Vector3 toPlayer = (player.position - _eyes.position).normalized;
-            float dp = Vector3.Dot(_eyes.forward, toPlayer);
-            RaycastHit hit;
-
-            Debug.DrawRay(_eyes.position, toPlayer * 100f, Color.red, 0.1f);
-
-            if (dp > _cosFOV && Physics.Raycast(_eyes.position, toPlayer, out hit, 100f))
+            _interest += _interestIncreaseRate;
+            if (_anger >= 100f)
             {
-                if (hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player"))
+                if (!_stateMachine.IsInState(chaseState))
                 {
-                    _seesPlayer = true;
-                    targetLocation = player;
-
-                    if (anger >= 80f)
-                    {
-                        Debug.Log("Anger high enough, enter Chase!");
-                        _stateMachine.ChangeState(chaseState);
-                    }
-                    else
-                    {
-                        interest += 5f; // Increase interest gradually
-                        Debug.Log("Anger too low. Gaining interest... Interest: " + interest);
-                        _stateMachine.ChangeState(stalkState);
-                    }
+                    _stateMachine.ChangeState(chaseState);
                 }
             }
             else
             {
-                _seesPlayer = false;
+                if (!_stateMachine.IsInState(stalkState) && !_stateMachine.IsInState(chaseState))
+                {
+                    _stateMachine.ChangeState(stalkState);
+                }
             }
+            
+        }
+        else
+        {
+            _interest -= _interestDecayRate;
+        }
 
-            yield return new WaitForSeconds(0.1f);
+        //When the Pontianak is chasing, do this
+        if (_stateMachine.IsInState(chaseState))
+        {
+            anger -= angerDecayRate * Time.deltaTime;
+
+            if (_anger <= 0f)
+            {
+                StartCoroutine(BeginCooldown(20f));
+            }
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            _anger += 80f;
+        }
+
+        //Stuff that works per frame
+        _stateMachine.Update();
+        agent.SetDestination(targetLocation);
+
+    }
+    #endregion
+
+    #region Coroutines
+    public IEnumerator ChooseRandomSpot()
+    {
+        //Setting params for the loop
+        bool validLocation = false;
+        int attempts = 0;
+
+        //Calculating Vectors
+        Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * 25f;
+        Vector3 randomOffset3D = new Vector3(randomOffset.x, 0f, randomOffset.y);
+
+        //Begin checking for suitable spots
+        NavMeshHit hit;
+        while (!validLocation && attempts <= 10)
+        {
+            Vector3 newTargetLocation = transform.position + randomOffset3D;
+            if (NavMesh.SamplePosition(newTargetLocation, out hit, 25f, NavMesh.AllAreas))
+            {
+                targetLocation = newTargetLocation;
+                validLocation = true;
+                yield return null;
+            }
+            else
+            {
+                attempts++;
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
+        if (!validLocation)
+        {
+            Debug.LogWarning("The Pontianak could not find a suitable location!");
         }
     }
 
+    public IEnumerator BeginCooldown(float cooldownTimer)
+    {
+        isResting = true;
+        _stateMachine.ChangeState(idleState);
+        yield return new WaitForSeconds(cooldownTimer);
+        isResting = false;
+        _stateMachine.ChangeState(patrolState);
+    }
+
+    private IEnumerator FindPlayerAgain()
+    {
+        while (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                yield return null;
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            
+        }
+        
+    }
+    #endregion
+
+    #region Public methods
     public void IncreaseAnger(float amount)
     {
-        anger += amount;
-        Debug.Log("Anger Increased: " + anger);
-
-        if (anger <= 80 && interest <= 50)
+        _anger += amount;
+        if (seesPlayer() && !_stateMachine.IsInState(chaseState))
         {
-            bool foundValidPoint = false;
-            int attempts = 0;
-
-            while (!foundValidPoint && attempts < 10)
+            if (_anger >= 100f)
             {
-                Vector3 awayDirection = (transform.position - player.position).normalized;
-                Vector3 randomOffset = Random.insideUnitSphere * 25f;
-                randomOffset.y = 0;
-
-                Vector3 runCandidate = transform.position + awayDirection * _distance + randomOffset;
-
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(runCandidate, out hit, 2f, NavMesh.AllAreas))
-                {
-                    agent.SetDestination(hit.position);
-                    _stateMachine.ChangeState(scaredState);
-                    foundValidPoint = true;
-                    break;
-                }
-
-                attempts++;
+                _stateMachine.ChangeState(chaseState);
             }
-
-            if (!foundValidPoint)
+            else if (_interest >= _stalkThreshold)
             {
-                Debug.LogWarning("A valid location has not been found!");
+                _stateMachine.ChangeState(stalkState);
             }
         }
+        else
+        {
+            _stateMachine.ChangeState(scaredState);
+        }
     }
-
-    public void UpdatePatrol()
+    public void ProgressToNextSpot()
     {
-        _patrolCenter = patrolSpots[_patrolIdx];
-        agent.SetDestination(patrolSpots[_patrolIdx].position);
+        _patrolIdx++;
+        _currentPatrolPoint = patrolPoints[_patrolIdx];
         _stateMachine.ChangeState(patrolState);
-        _patrolIdx = (_patrolIdx + 1) % patrolSpots.Count;
-        Debug.Log("Next Patrol Index: " + _patrolIdx);
     }
-    public IEnumerator ChaseTimer()
-    {
-        while (anger >= 0f)
-        {
-            anger -= DecayRate;
-            if (anger <= 0f)
-            {
-                _stateMachine.ChangeState(patrolState);
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-    public IEnumerator ChooseRandomPoint()
-    {
-        while (true)
-        {
-            Vector3 rawPoint = Vector3.zero;
-            NavMeshHit hit = new NavMeshHit();
-            bool foundValidPoint = false;
-            int attempts = 0;
-
-            // Try up to 10 times to find a valid point
-            while (!foundValidPoint && attempts < 10)
-            {
-                Vector3 randomOffset = Random.insideUnitSphere * 25f;
-                randomOffset.y = 0;
-                rawPoint = _patrolCenter.position + randomOffset;
-
-                if (NavMesh.SamplePosition(rawPoint, out hit, 25f, NavMesh.AllAreas))
-                {
-                    foundValidPoint = true;
-                }
-                else
-                {
-                    attempts++;
-                    yield return null;
-                }
-            }
-
-            if (foundValidPoint)
-            {
-                agent.SetDestination(hit.position);
-            }
-            else
-            {
-                Debug.LogWarning("Failed to find a valid patrol point after 10 attempts.");
-            }
-
-            yield return new WaitForSeconds(5f);
-        }
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            FPSControllerCharacter FPS = collision.gameObject.GetComponent<FPSControllerCharacter>();
-            FPS.Die();
-        }
-    }
+    #endregion
 }
