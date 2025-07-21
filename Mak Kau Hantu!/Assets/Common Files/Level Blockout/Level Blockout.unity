@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 2.59
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.11049306, g: 0.114231035, b: 0.122641504, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 37871769bffa17747999f3b437bdff4e, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -4017,7 +4017,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7726981377883527735}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798587589}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -4824,12 +4824,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 765131405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1798587589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 208069429433453022, guid: db096e2839e43d34d9ed0211eb56442a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7726981377883527735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1803340053
 GameObject:
   m_ObjectHideFlags: 0
@@ -5930,52 +5924,27 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 513478667907716081, guid: db096e2839e43d34d9ed0211eb56442a,
+    - target: {fileID: 2762404018188990976, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 590786439848993973, guid: db096e2839e43d34d9ed0211eb56442a,
+    - target: {fileID: 2762404018188990976, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 15
+      propertyPath: m_Color.b
+      value: 0.5471698
       objectReference: {fileID: 0}
-    - target: {fileID: 1673146791403077174, guid: db096e2839e43d34d9ed0211eb56442a,
+    - target: {fileID: 2762404018188990976, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Color.g
+      value: 0.5471698
       objectReference: {fileID: 0}
-    - target: {fileID: 2589390940218782801, guid: db096e2839e43d34d9ed0211eb56442a,
+    - target: {fileID: 2762404018188990976, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2643459940143937665, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_Name
-      value: Resume
-      objectReference: {fileID: 0}
-    - target: {fileID: 2917326872923996790, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_text
-      value: Resume
+      propertyPath: m_Color.r
+      value: 0.5471698
       objectReference: {fileID: 0}
     - target: {fileID: 2964332089732782745, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020675781127884625, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094901923287622481, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4201785685855809199, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6045,42 +6014,15 @@ PrefabInstance:
       propertyPath: fpsController
       value: 
       objectReference: {fileID: 1093654222}
-    - target: {fileID: 5493619776810689884, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: gameplayCursor
-      value: 
-      objectReference: {fileID: 1798587589}
     - target: {fileID: 5893752450071833792, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
       propertyPath: m_Name
       value: GAME UI
       objectReference: {fileID: 0}
-    - target: {fileID: 7414909867889981607, guid: db096e2839e43d34d9ed0211eb56442a,
+    - target: {fileID: 7205944856928516997, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -108
-      objectReference: {fileID: 0}
-    - target: {fileID: 8008442335364716473, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_text
-      value: 'Move With WASD
-
-        Interact With E
-
-        Open Flashlight With
-        F
-
-        Pause The Game With ESC '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8201860981629661245, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8201860981629661245, guid: db096e2839e43d34d9ed0211eb56442a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
+      propertyPath: m_Color.a
+      value: 0.6117647
       objectReference: {fileID: 0}
     - target: {fileID: 9149322590947948582, guid: db096e2839e43d34d9ed0211eb56442a,
         type: 3}
