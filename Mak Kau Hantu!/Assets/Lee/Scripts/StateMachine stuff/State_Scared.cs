@@ -24,7 +24,10 @@ public class State_Scared : IState
     // Update is called once per frame
     public void OnUpdate()
     {
-
+        if (!_ctx.agent.pathPending && _ctx.agent.remainingDistance <= _ctx.agent.stoppingDistance + 0.5f)
+        {
+            _ctx.StartCoroutine(_ctx.ScaredCooldown());
+        }
     }
 
     public void OnExit()

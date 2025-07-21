@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class StateMachine
 {
-    public IState _currentState;
+    public IState currentState;
 
     public void ChangeState(IState newState)
     {
-        if (_currentState != null)
+        if (currentState != null)
         {
-            _currentState.OnExit();
+            currentState.OnExit();
         }
         else
         {
-            _currentState = newState;
-            _currentState.OnEnter();
+            currentState = newState;
+            currentState.OnEnter();
         }
         
 
     }
 
-    public void Update() => _currentState?.OnUpdate();
+    public void Update() => currentState?.OnUpdate();
 }
