@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public GameObject player;
     public GameObject ghost;
     public FPSControllerCharacter fpsController;
+    public GameObject gameplayCursor; // Your in-game cursor image
+    public GameObject menuCamera;
 
     private Vector3 initialPlayerPosition;
     private Quaternion initialPlayerRotation;
@@ -42,7 +44,6 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        // Store initial spawn positions
         if (player != null)
         {
             initialPlayerPosition = player.transform.position;
@@ -62,10 +63,10 @@ public class UIManager : MonoBehaviour
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
+        if (gameplayCursor != null) gameplayCursor.SetActive(false);
 
         voiceRecognizer = FindObjectOfType<MalayVoiceRecognizer>();
 
-        // Assign button events
         startButton.onClick.AddListener(StartGame);
         mainMenuQuitButton.onClick.AddListener(QuitGame);
         resumeButton.onClick.AddListener(ResumeGame);
@@ -95,6 +96,8 @@ public class UIManager : MonoBehaviour
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
+        if (gameplayCursor != null) gameplayCursor.SetActive(true);
+        if (menuCamera != null) menuCamera.SetActive(false);
 
         if (player != null) player.SetActive(true);
         if (ghost != null) ghost.SetActive(true);
@@ -120,6 +123,7 @@ public class UIManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        if (gameplayCursor != null) gameplayCursor.SetActive(false);
 
         if (fpsController != null) fpsController.isPaused = true;
 
@@ -135,6 +139,7 @@ public class UIManager : MonoBehaviour
 
         Cursor.lockState = isReadingNote ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isReadingNote;
+        if (gameplayCursor != null) gameplayCursor.SetActive(!isReadingNote);
 
         if (fpsController != null) fpsController.isPaused = false;
 
@@ -153,6 +158,7 @@ public class UIManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            if (gameplayCursor != null) gameplayCursor.SetActive(false);
             Time.timeScale = 0f;
 
             if (fpsController != null) fpsController.isPaused = true;
@@ -162,6 +168,7 @@ public class UIManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            if (gameplayCursor != null) gameplayCursor.SetActive(true);
             Time.timeScale = 1f;
 
             if (fpsController != null) fpsController.isPaused = false;
@@ -180,6 +187,8 @@ public class UIManager : MonoBehaviour
         finalScreenUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
+        if (gameplayCursor != null) gameplayCursor.SetActive(false);
+        if (menuCamera != null) menuCamera.SetActive(true);
 
         Time.timeScale = 1f;
         isGamePaused = false;
@@ -203,6 +212,7 @@ public class UIManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         instructionMenuUI.SetActive(false);
         voiceTesterPanel.SetActive(false);
+        if (gameplayCursor != null) gameplayCursor.SetActive(false);
 
         Time.timeScale = 0f;
 
@@ -260,9 +270,6 @@ public class UIManager : MonoBehaviour
 #endif
     }
 
-    /// <summary>
-    /// Fully resets game state — positions, internal flags, etc.
-    /// </summary>
     private void ResetGameState()
     {
         if (player != null)
@@ -276,11 +283,6 @@ public class UIManager : MonoBehaviour
             ghost.transform.position = initialGhostPosition;
             ghost.transform.rotation = initialGhostRotation;
         }
-
-        // Reset other systems like items, win conditions, timers etc.
-        // For example:
-        // FindObjectOfType<ItemManager>()?.ResetItems();
-        // FindObjectOfType<WinCondition>()?.ResetWin();
 
         isReadingNote = false;
         isGamePaused = false;

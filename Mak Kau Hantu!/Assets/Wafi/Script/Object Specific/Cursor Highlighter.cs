@@ -28,7 +28,7 @@ public class CursorHighlighter : MonoBehaviour
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
-            if (hit.collider.CompareTag("Grabbable"))
+            if (hit.collider.CompareTag("Grabbable") || hit.collider.CompareTag("Note"))
             {
                 cursorImage.color = highlightColor;
                 return;

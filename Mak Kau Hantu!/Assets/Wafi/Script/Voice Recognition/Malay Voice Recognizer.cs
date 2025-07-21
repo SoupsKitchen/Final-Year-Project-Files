@@ -134,7 +134,10 @@ public class MalayVoiceRecognizer : MonoBehaviour
 
         spokenText = spokenText.ToLower();
 
-        // ✅ Display only Malay text in UI
+        // Log to Console
+        Debug.Log("Recognized Malay Text: " + spokenText);
+
+        // Display only Malay text in UI
         ui?.DisplayRecognizedText(spokenText);
 
         // Avoid duplicate triggers
