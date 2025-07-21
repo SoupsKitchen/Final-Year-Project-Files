@@ -594,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: 15}
+  m_AnchoredPosition: {x: 40, y: -108}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1845947910229905275
@@ -1369,7 +1369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: -108}
+  m_AnchoredPosition: {x: 40, y: 15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7943422145409385967
@@ -1884,7 +1884,10 @@ MonoBehaviour:
 
     Interact With E
 
-    Open Flashlight With F'
+    Open Flashlight With F
+
+    Pause
+    The Game With ESC '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 58329cb77b0b68b44921990f368ba600, type: 2}
   m_sharedMaterial: {fileID: -3933315956809430559, guid: 58329cb77b0b68b44921990f368ba600,
@@ -2012,6 +2015,11 @@ PrefabInstance:
       propertyPath: isReadingNote
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5509504656470598293, guid: b5d4e7d98fc768d45bbc3405f6751b35,
+        type: 3}
+      propertyPath: gameplayCursor
+      value: 
+      objectReference: {fileID: 208069429433453022}
     - target: {fileID: 5509504656470598293, guid: b5d4e7d98fc768d45bbc3405f6751b35,
         type: 3}
       propertyPath: finalQuitButton
@@ -2687,6 +2695,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6020687007430488237, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6194102531028534023, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2884,7 +2897,7 @@ PrefabInstance:
     - target: {fileID: 7719536129464752092, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8046714021215892826, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
         type: 3}
@@ -2920,6 +2933,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 433
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485208494604730866, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+        type: 3}
+      propertyPath: m_Name
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668757139442607082, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724208814156282629, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+        type: 3}
+      propertyPath: m_text
+      value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 9131523489216744475, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
         type: 3}
@@ -2994,6 +3022,12 @@ PrefabInstance:
       addedObject: {fileID: 949520116960112960}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7b5297fce3be347b34fdd46e88d4ae, type: 3}
+--- !u!1 &208069429433453022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6020687007430488237, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5867892226558523763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &370723404459638752 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6074197136100460179, guid: 1b7b5297fce3be347b34fdd46e88d4ae,
