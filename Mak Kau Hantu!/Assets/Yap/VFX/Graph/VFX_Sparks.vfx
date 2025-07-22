@@ -2605,7 +2605,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.44999998807907107,"y":2.200000047683716}'
+      m_SerializableObject: '{"x":1.0,"y":3.0}'
     m_Space: 2147483647
   m_Property:
     name: Delay
