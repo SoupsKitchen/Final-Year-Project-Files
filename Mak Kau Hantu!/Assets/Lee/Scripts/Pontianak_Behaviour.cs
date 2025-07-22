@@ -72,24 +72,16 @@ public class Pontianak_Behaviour : MonoBehaviour
     public Vector3 toPlayer;
     public bool seesPlayer()
     {
-        float distanceToPlayer = Vector3.Distance(eyes.position, player.transform.position);
         RaycastHit hit;
-
-        // Check within radius
-        if (distanceToPlayer < _viewRad)
+        if (Physics.Raycast(eyes.position, toPlayer, out hit, 100f))
         {
-            // Check within view angle
-            float angleToPlayer = Vector3.Angle(eyes.forward, toPlayer);
-            if (angleToPlayer < _viewAng / 2f)
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
-                // Optional: Raycast to check line of sight
-                if (Physics.Raycast(eyes.position, toPlayer, out hit, distanceToPlayer))
-                {
-                    if (hit.collider.CompareTag("Player"))
-                    {
-                        return true;
-                    }
-                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         return false;
@@ -125,8 +117,8 @@ public class Pontianak_Behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        toPlayer = (player.transform.position - eyes.position).normalized;
-
+        toPlayer = player.transform.position - eyes.position;
+        Debug.DrawRay(eyes.position, toPlayer, Color.red);
         if (seesPlayer() && !isResting)
         {
             _interest += _interestIncreaseRate;

@@ -47,6 +47,7 @@ MonoBehaviour:
   witApiToken: YZWBZXKB43VPNBPIFZZMFKWY27SSHE3O
   playerRunner: {fileID: 0}
   ghostController: {fileID: 0}
+  pontianakBehaviour: {fileID: 0}
   commandCooldown: 2
   ghostRepelWords:
   - pergi
@@ -57,17 +58,24 @@ MonoBehaviour:
   - aku tak takut
   - berambus
   - halau
-  - halau
-  - kau takut
+  - jangan
+  - 'jauh '
+  - jauhlah
+  - dah
+  - dahlah
   ghostAngerWords:
   - mari sini
   - bodoh
   - lemah
-  - tunjuk diri
+  - puki
   - pengecut
   - 'meh '
-  - kau tak berani
+  - penakut
   - anjing
   - muncul
-  - datang
+  - pukimak
   - datanglah
+  - mak kau hantu
+  - bapak kau
+  angerIncreaseAmount: 10
+  angerDecreaseAmount: 10
