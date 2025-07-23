@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 3
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_LightLayerMask: 1
   m_RenderingLayers: 1
   m_CustomShadowLayers: 0
@@ -194,8 +194,8 @@ MonoBehaviour:
   maxTimeBetweenFlickers: 120
   flickerDuration: 1.5
   minFlickerIntensity: 50
-  maxFlickerIntensity: 5000
-  stableIntensity: 5000
+  maxFlickerIntensity: 500
+  stableIntensity: 500
   flickerSpeed: 0.05
 --- !u!1 &4222365933114534409
 GameObject:
