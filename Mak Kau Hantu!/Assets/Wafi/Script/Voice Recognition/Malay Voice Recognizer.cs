@@ -164,12 +164,14 @@ public class MalayVoiceRecognizer : MonoBehaviour
 
         if (angerChange != 0f && pontianakBehaviour != null)
         {
+            // Apply anger change
             pontianakBehaviour.anger += angerChange;
 
+            // Debug: Show how much was added or removed
             if (angerChange > 0)
-                ghostController?.ChasePlayerFaster();
+                Debug.Log($"[Speech] Anger increased by {angerChange}. Current anger: {pontianakBehaviour.anger}");
             else
-                ghostController?.RunAwayFromPlayer();
+                Debug.Log($"[Speech] Anger decreased by {Mathf.Abs(angerChange)}. Current anger: {pontianakBehaviour.anger}");
         }
 
         if (spokenText.Contains("lari"))
