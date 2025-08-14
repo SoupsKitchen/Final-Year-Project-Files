@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{b2e901e6-a8ea-4d8e-8dfa-e725bf7f8506}">
+		<property name="name">
+			<value>GhostAura</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5abdfa20-b73f-4442-99b7-a915e0486f9d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{0928e279-54b8-46d9-9829-14cd0da440c2}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{0928e279-54b8-46d9-9829-14cd0da440c2}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

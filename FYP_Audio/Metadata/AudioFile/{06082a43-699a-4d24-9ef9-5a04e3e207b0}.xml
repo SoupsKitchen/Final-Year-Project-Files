@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{06082a43-699a-4d24-9ef9-5a04e3e207b0}">
+		<property name="assetPath">
+			<value>woman-screaming-sfx-screaming-sound-effect-320169.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>8.0979591836734688</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{854ad469-d8e4-448f-a73f-e7183e248966}</destination>
+		</relationship>
+	</object>
+</objects>

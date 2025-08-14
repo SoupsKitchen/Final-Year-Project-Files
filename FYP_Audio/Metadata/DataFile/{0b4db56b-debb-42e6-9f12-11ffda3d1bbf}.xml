@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="DataFile" id="{0b4db56b-debb-42e6-9f12-11ffda3d1bbf}">
+		<property name="assetPath">
+			<value>Ghost Voices/Suamiku Pengkhianat.aup3</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{854ad469-d8e4-448f-a73f-e7183e248966}</destination>
+		</relationship>
+	</object>
+</objects>

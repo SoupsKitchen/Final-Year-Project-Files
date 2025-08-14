@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7206ce9c-269a-481e-89bf-65fcab7a1601" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Level Blockout/Level Blockout.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Level Blockout/Level Blockout.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Main Player Character.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Main Player Character.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Balanced.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Balanced.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-HighFidelity.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Performant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Performant.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Behaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Behaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/StateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/StateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/State_Patrol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/State_Patrol.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/New Terrain 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/New Terrain 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_1a0a6815-3c92-4e81-98dd-5b04c1fa1a01.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_1a0a6815-3c92-4e81-98dd-5b04c1fa1a01.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_871d37ab-81ea-4624-8220-f5c50eb3fc75.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_871d37ab-81ea-4624-8220-f5c50eb3fc75.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_afef3ab3-41ba-412e-a653-25739d073d66.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_afef3ab3-41ba-412e-a653-25739d073d66.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_b31121f1-ff5f-401f-a978-0b88a83de1f8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_b31121f1-ff5f-401f-a978-0b88a83de1f8.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_d5957451-b031-4bef-920b-67360bc34e22.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_d5957451-b031-4bef-920b-67360bc34e22.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_dbef282d-f850-4138-bbae-c86ec3ad052e.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_dbef282d-f850-4138-bbae-c86ec3ad052e.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_eeddffe1-da3a-4b68-ac1d-3c417e00ac8f.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_eeddffe1-da3a-4b68-ac1d-3c417e00ac8f.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_fa0bed93-ecc8-4081-aa16-c3bb947c3e5f.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_fa0bed93-ecc8-4081-aa16-c3bb947c3e5f.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Wafi/Script/Player Specific/FlashLightToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Wafi/Script/Player Specific/FlashLightToggle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="30HTjdus0QWLT7vkPS7uh43TXVQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Users\drdar\Desktop\Final-Year-Project-Files\Mak Kau Hantu!&quot; -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\drdar\Desktop\Final-Year-Project-Files\Mak Kau Hantu!" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.55f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\drdar\Desktop\Final-Year-Project-Files\Mak Kau Hantu!&quot; -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\drdar\Desktop\Final-Year-Project-Files\Mak Kau Hantu!" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7206ce9c-269a-481e-89bf-65fcab7a1601" name="Changes" comment="" />
+      <created>1753283639444</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753283639444</updated>
+      <workItem from="1753283643248" duration="2425000" />
+      <workItem from="1755070463874" duration="5699000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{c6212886-c05f-4666-b305-97ce57630cb9}">
+		<property name="name">
+			<value>Ghost State</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5abdfa20-b73f-4442-99b7-a915e0486f9d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{6ae31f7d-ca7d-4eae-b0f0-5de8817398ad}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{6ae31f7d-ca7d-4eae-b0f0-5de8817398ad}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

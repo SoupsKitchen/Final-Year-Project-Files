@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{e1459c70-98fd-4b67-90a1-e465ffe16cd8}">
+		<property name="assetPath">
+			<value>Test Assets/Ghost Victory Line.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>495.09877551020406</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{854ad469-d8e4-448f-a73f-e7183e248966}</destination>
+		</relationship>
+	</object>
+</objects>
