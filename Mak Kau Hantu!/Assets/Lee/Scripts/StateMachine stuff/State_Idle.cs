@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State_Idle : IState
 {
-    private float _runSpeed = 0f;
+    private float _runSpeed = 2f;
     private Pontianak_Behaviour _ctx;
 
     public State_Idle(Pontianak_Behaviour ctx)

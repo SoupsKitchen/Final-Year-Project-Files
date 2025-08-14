@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State_Chase : IState
 {
-    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
+    private float _runSpeed = 10f, _accelSpeed = 10f, _turnSpeed = 600f;
     private Pontianak_Behaviour _ctx;
 
     public State_Chase(Pontianak_Behaviour ctx)

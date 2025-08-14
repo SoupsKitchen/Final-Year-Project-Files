@@ -108,12 +108,6 @@ public class Pontianak_Behaviour : MonoBehaviour
         idleState = new State_Idle(this);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
