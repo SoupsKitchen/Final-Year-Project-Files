@@ -1971,6 +1971,133 @@ Transform:
   m_Children: []
   m_Father: {fileID: 340440479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &473793786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473793789}
+  - component: {fileID: 473793788}
+  - component: {fileID: 473793787}
+  m_Layer: 0
+  m_Name: AudioManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &473793787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473793786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cef9dfb1f829a84bb828a2d182217bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LevelAmbience>k__BackingField:
+    Guid:
+      Data1: 834778260
+      Data2: 1303516191
+      Data3: 1101850537
+      Data4: 1413713299
+    Path: event:/Ambience/Level Ambience
+  <GhostAmbience>k__BackingField:
+    Guid:
+      Data1: -997590376
+      Data2: 1274260262
+      Data3: -1293294670
+      Data4: -1835574287
+    Path: event:/Ambience/GhostAuraStates
+  <GhostHurt>k__BackingField:
+    Guid:
+      Data1: 1791113960
+      Data2: 1168542505
+      Data3: 1909354158
+      Data4: -1343617386
+    Path: event:/Ghost Voice Lines/Ghost Hurt Voice Line
+  <VictoryLine>k__BackingField:
+    Guid:
+      Data1: 1264964596
+      Data2: 1205095942
+      Data3: -1870191456
+      Data4: 715481738
+    Path: event:/Ghost Voice Lines/Victory Screen Ghost Voice Line
+  <DoorKnock>k__BackingField:
+    Guid:
+      Data1: 979760162
+      Data2: 1137773883
+      Data3: -476159047
+      Data4: 1676964697
+    Path: event:/SFX/Door Knock
+  <FlashLightClick>k__BackingField:
+    Guid:
+      Data1: -1576746539
+      Data2: 1165808084
+      Data3: -2095206751
+      Data4: 2136822364
+    Path: event:/SFX/Flashlight Click
+  <Footsteps>k__BackingField:
+    Guid:
+      Data1: 312653249
+      Data2: 1162833635
+      Data3: 1581364671
+      Data4: -547528352
+    Path: event:/SFX/Footstep SFX
+  <ItemPickup>k__BackingField:
+    Guid:
+      Data1: -1732850188
+      Data2: 1281579143
+      Data3: -1291870577
+      Data4: -1402268554
+    Path: event:/SFX/Item Pickup
+  <ButtonCLick>k__BackingField:
+    Guid:
+      Data1: 1663576477
+      Data2: 1155526723
+      Data3: 764395402
+      Data4: 1922424029
+    Path: event:/UI/Button Click
+  <PaperShuffling>k__BackingField:
+    Guid:
+      Data1: -360125993
+      Data2: 1107879332
+      Data3: 78504846
+      Data4: -923528522
+    Path: event:/UI/Paper Shuffling
+--- !u!114 &473793788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473793786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cbbba1ee476a04aaf8f427806e14cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &473793789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473793786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 197.34819, y: 26.959047, z: 104.12969}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &481275431 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9149322590947948582, guid: db096e2839e43d34d9ed0211eb56442a,
@@ -8972,3 +9099,4 @@ SceneRoots:
   - {fileID: 906630516}
   - {fileID: 340440479}
   - {fileID: 347458035}
+  - {fileID: 473793789}
