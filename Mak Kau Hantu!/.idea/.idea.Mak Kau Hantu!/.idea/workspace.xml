@@ -5,8 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7206ce9c-269a-481e-89bf-65fcab7a1601" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Mak Kau Hantu!/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mak Kau Hantu!/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Level Blockout/Level Blockout.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Level Blockout/Level Blockout.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Main Player Character.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Main Player Character.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Balanced.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Balanced.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-HighFidelity.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Performant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Common Files/Settings/URP-Performant.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Behaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Behaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/Pontianak_Test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/StateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/StateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/State_Patrol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Lee/Scripts/StateMachine stuff/State_Patrol.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/New Terrain 1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/New Terrain 1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_1a0a6815-3c92-4e81-98dd-5b04c1fa1a01.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_1a0a6815-3c92-4e81-98dd-5b04c1fa1a01.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_871d37ab-81ea-4624-8220-f5c50eb3fc75.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_871d37ab-81ea-4624-8220-f5c50eb3fc75.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_afef3ab3-41ba-412e-a653-25739d073d66.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_afef3ab3-41ba-412e-a653-25739d073d66.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_b31121f1-ff5f-401f-a978-0b88a83de1f8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_b31121f1-ff5f-401f-a978-0b88a83de1f8.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_d5957451-b031-4bef-920b-67360bc34e22.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_d5957451-b031-4bef-920b-67360bc34e22.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_dbef282d-f850-4138-bbae-c86ec3ad052e.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_dbef282d-f850-4138-bbae-c86ec3ad052e.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_eeddffe1-da3a-4b68-ac1d-3c417e00ac8f.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_eeddffe1-da3a-4b68-ac1d-3c417e00ac8f.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TerrainData_fa0bed93-ecc8-4081-aa16-c3bb947c3e5f.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TerrainData_fa0bed93-ecc8-4081-aa16-c3bb947c3e5f.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Wafi/Script/Player Specific/FlashLightToggle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Wafi/Script/Player Specific/FlashLightToggle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/AudioManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +113,6 @@
       <updated>1753283639444</updated>
       <workItem from="1753283643248" duration="2425000" />
       <workItem from="1755070463874" duration="5699000" />
-      <workItem from="1755195339469" duration="294000" />
     </task>
     <servers />
   </component>

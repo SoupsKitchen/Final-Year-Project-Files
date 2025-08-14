@@ -16,7 +16,6 @@ public class FlashlightToggle : MonoBehaviour
         {
             if (flashlight != null)
                 flashlight.enabled = !flashlight.enabled; // Toggle on/off
-            AudioManager.AudioPlayer.PlayOneShot(FMODEvents.FMODInstance.FlashLightClick, transform.position);
         }
     }
 }
