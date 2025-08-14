@@ -8,7 +8,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class State_Stalk : IState
 {
-    private float _runSpeed = 7f, _accelSpeed = 10f, _turnSpeed = 600f;
+    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
     private float _minDistance = 10f, _maxDistance = 40f;
 
     private Transform _chosenSpot;

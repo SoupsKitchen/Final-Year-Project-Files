@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221379987}
   m_Layer: 0
-  m_Name: House
+  m_Name: HOUSe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4382,7 +4382,7 @@ PrefabInstance:
     - target: {fileID: 1927813613100833189, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1927813613100833189, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
@@ -4392,7 +4392,7 @@ PrefabInstance:
     - target: {fileID: 1927813613100833189, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2099033206962393125, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
@@ -4512,12 +4512,7 @@ PrefabInstance:
     - target: {fileID: 8532046044239549299, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}
       propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8532046044239549299, guid: b3b9cb5ef8a108540a7f01287b4823eb,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8660059524376082286, guid: b3b9cb5ef8a108540a7f01287b4823eb,
         type: 3}

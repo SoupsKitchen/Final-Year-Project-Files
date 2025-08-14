@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class State_Patrol : IState
 {
-    private float _runSpeed = 2f, _accelSpeed = 5f, _turnSpeed = 300f;
+    private float _runSpeed = 40f, _accelSpeed = 10f, _turnSpeed = 600f;
     private Pontianak_Behaviour _ctx;
 
     public State_Patrol(Pontianak_Behaviour ctx)
@@ -18,7 +18,6 @@ public class State_Patrol : IState
     {
         Debug.Log("Pontianak is patrolling!");
         _ctx.agent.speed = _runSpeed;
-        _ctx.agent.acceleration = _accelSpeed;
         _ctx.agent.angularSpeed = _turnSpeed;
     }
 
